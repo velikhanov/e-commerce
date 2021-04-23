@@ -39,7 +39,7 @@ class AdminController extends Controller
       $user->phone = $request->input('phone')?preg_replace('/\s+/', '', str_replace(array( '+', '-', '(', ')' ), '', $request->input('phone'))):(Auth::user()->phone?Auth::user()->phone:NULL);
 
       if ($request->hasFile('userimg')){
-        Storage::disk('public')->exists('users/'.$user->img)?Storage::disk('public')->delete('users/'.$user->img):NULL;
+        Storage::disk('google')->exists('users/'.$user->img)?Storage::disk('google')->delete('users/'.$user->img):NULL;
         $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
         $request->file('userimg')->storeAs('users', $user->img);
         }
