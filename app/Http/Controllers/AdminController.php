@@ -43,6 +43,7 @@ class AdminController extends Controller
       //   $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
       //   $request->file('userimg')->storeAs('users', $user->img);
       //   }
+      
       Storage::disk('google')->put('test.txt', 'Hello World');
 
       $user->update();
