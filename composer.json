@@ -41,7 +41,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
 	"classmap": [
-    	    "vendor/google/apiclient-services/src/Google/"
+		"vendor/google/apiclient-services/src/Google/Service/"
 	]
     },
     "autoload-dev": {
