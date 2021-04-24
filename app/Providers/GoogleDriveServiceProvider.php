@@ -22,7 +22,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
           $client->setAccessType('offline');
           $client->setClientId($config['clientId']);
           $client->refreshToken($config['refreshToken']);
-          $client->fetchAccessTokenWithRefreshToken($config['refreshToken']); <--- This save my life
+          $client->fetchAccessTokenWithRefreshToken($config['refreshToken']);
 
           $service = new \Google_Service_Drive($client);
           $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, $config['folderId']);
