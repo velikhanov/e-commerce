@@ -41,8 +41,7 @@ class AdminController extends Controller
       if ($request->hasFile('userimg')){
         Storage::disk('google')->exists('users/'.$user->img)?Storage::disk('google')->delete('users/'.$user->img):NULL;
         $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
-        $request->file('userimg')->store('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo', 'google');
-      }
+        Storage::disk('google')->$request->file('userimg')->storeAs('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo', $user->img);
 
       // Storage::disk('google')->put('test.txt', 'Hello World');
 
