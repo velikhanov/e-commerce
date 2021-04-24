@@ -24,7 +24,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->setAccessType('offline');
             $client->refreshToken($config['refreshToken']);
             $client->fetchAccessTokenWithRefreshToken($config['refreshToken']);
-            $service = new \Google_Service_Drive($client);
+            $service = new Google_Service_Drive($client);
             $adapter = new GoogleDriveAdapter($service, $config['folderId']);
 
             return new Filesystem($adapter);
