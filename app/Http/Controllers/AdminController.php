@@ -38,13 +38,13 @@ class AdminController extends Controller
       $user->email = $request->input('email')?$request->input('email'):Auth::user()->email;
       $user->phone = $request->input('phone')?preg_replace('/\s+/', '', str_replace(array( '+', '-', '(', ')' ), '', $request->input('phone'))):(Auth::user()->phone?Auth::user()->phone:NULL);
 
-      // if ($request->hasFile('userimg')){
-      //   Storage::disk('google')->exists('users/'.$user->img)?Storage::disk('google')->delete('users/'.$user->img):NULL;
-      //   $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
-      //   $request->file('userimg')->storeAs('users', $user->img);
-      //   }
-      
-      Storage::disk('google')->put('test.txt', 'Hello World');
+      if ($request->hasFile('userimg')){
+        Storage::disk('google')->exists('users/'.$user->img)?Storage::disk('google')->delete('users/'.$user->img):NULL;
+        $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
+        $request->file('userimg')->storeAs('users', $user->img);
+        }
+
+      // Storage::disk('google')->put('test.txt', 'Hello World');
 
       $user->update();
 
