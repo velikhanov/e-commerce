@@ -18,15 +18,16 @@ class GoogleDriveServiceProvider extends ServiceProvider
     public function boot()
     {
         Storage::extend('google', function($app, $config) {
-          $client = new \Google_Client();
-          $client->setAccessType('offline');
-          $client->setClientId($config['clientId']);
-          $client->refreshToken($config['refreshToken']);
-          $client->fetchAccessTokenWithRefreshToken($config['refreshToken']);
+            $client = new Google_Client();
+            $client->setClientId($config['clientId']);
+            $client->setClientSecret($config['clientSecret']);
+            $client->setAccessType('offline');
+            $client->refreshToken($config['refreshToken']);
+            $client->fetchAccessTokenWithRefreshToken($config['refreshToken']);
+            $service = new \Google_Service_Drive($client);
+            $adapter = new GoogleDriveAdapter($service, $config['folderId']);
 
-          $service = new \Google_Service_Drive($client);
-          $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, $config['folderId']);
-          return new \League\Flysystem\Filesystem($adapter);
+            return new Filesystem($adapter);
         });
     }
 
