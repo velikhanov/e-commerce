@@ -30,7 +30,7 @@ class ComposerServiceProvider extends ServiceProvider
             'inc.catalog', NavigationComposer::class
         );
         View::composer(
-            'auth.inc.catalog', UsersPersonalDaraComposer::class
+            'auth.inc.header', UsersPersonalDaraComposer::class
         );
     }
 }
