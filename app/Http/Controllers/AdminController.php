@@ -47,7 +47,7 @@ class AdminController extends Controller
           ->where('filename', '=', pathinfo($user->img, PATHINFO_FILENAME))
           ->where('extension', '=', pathinfo($user->img, PATHINFO_EXTENSION))
           ->first();
-          $file['path']?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
+          isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
           // Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL;
         };
         //
