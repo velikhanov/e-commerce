@@ -36,8 +36,10 @@ class NavigationComposer
       //     $subcatcoll = collect(isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
       //   };
       // };
+      $catarr = array();
+      $subcatarr = array();
       foreach ($catalog as $cat) {
-    $catimg = array(); //define it here as null
+    $catimg = null; //define it here as null
         if(isset($cat->img)){
             $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
             $file = $contents
@@ -48,9 +50,9 @@ class NavigationComposer
 
              $catimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
         };
-        $cat[] = $catimg; // create a new field called img_url and assign value
+        $catarr[] = $catimg; // create a new field called img_url and assign value
         foreach ($cat->children as $subcat) {
-          $subcatimg = array();
+          $subcatimg = null;
           if(isset($subcat->img)){
               $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
               $file = $contents
@@ -63,8 +65,7 @@ class NavigationComposer
       $subcat[] = $subcatimg;
         };
       };
-
-      dd($cat);
+      dd($catarr);
       return $view->with(['catalog' => $catalog]);
   }
 }
