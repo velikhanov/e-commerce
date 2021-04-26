@@ -20,8 +20,8 @@ class UsersPersonalDataComposer
       ->where('extension', '=', pathinfo($user->img, PATHINFO_EXTENSION))
       ->first();
     // $userimg = isset($file['path'])?$file['path']:NULL;
-    $userimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
     };
+    $userimg = isset($user->img)?((isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
 
     return $view->with('userimg', $userimg);
   }

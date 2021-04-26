@@ -43,7 +43,6 @@ class CategoryController extends Controller
     {
       $data = $request->all();
       $request->parent_id == NULL ? $data['code'] = 'categories' : $data['code'] = $request->code;
-
       if ($request->hasFile('catimg')){
         $data['img'] = 'img_'.rand(1, 999).time().'.'.$request->file('catimg')->getClientOriginalExtension();
         $request->file('catimg')->storeAs('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze', $data['img'], 'google');
