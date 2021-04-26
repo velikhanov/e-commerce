@@ -62,7 +62,7 @@ class NavigationComposer
               ->first();
               $subcatimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
           };
-      $subcat[] = $subcatimg;
+      $subcatarr[] = $subcatimg;
         };
       };
       dd($catarr);
