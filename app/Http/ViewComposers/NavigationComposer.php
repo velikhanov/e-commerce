@@ -22,7 +22,7 @@ class NavigationComposer
           ->where('filename', '=', pathinfo($cat->img, PATHINFO_FILENAME))
           ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
           ->first();
-          $catimg =isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL
+          $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
         };
       };
      //$catimg = dd(isset($categories->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
