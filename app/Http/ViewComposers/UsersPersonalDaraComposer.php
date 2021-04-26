@@ -7,7 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
-class UsersPersonalDaraComposer
+class UsersPersonalDataComposer
 {
   public function compose(View $view)
   {
@@ -20,7 +20,10 @@ class UsersPersonalDaraComposer
       ->where('extension', '=', pathinfo($user->img, PATHINFO_EXTENSION))
       ->first();
     $userimg = isset($file['path'])?$file['path']:NULL;
-    // isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->get($file['path']):NULL):NULL;
+    return response($userimg, 200)
+       ->header('ContentType', $file['mimetype'])
+       ->header('Content-Disposition', "attachment; filename='$user->img'");
+    // $userimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->get($file['path']):NULL):NULL;
     };
 
     return $view->with('userimg', $userimg);
