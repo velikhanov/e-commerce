@@ -37,10 +37,12 @@
                   {{ Auth::user()->name }} <span class="caret"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right logout" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{{ route('user_panel') }}">Личный кабинет</a>
 								@if(Auth::user()->role)
-							  	<a class="dropdown-item" href="{{ route('admin_order') }}">Панель администратора</a>
+							  	<a class="dropdown-item" href="{{ route('admin_order') }}">Заказы</a>
+							  	<a class="dropdown-item" href="{{ route('categories.index') }}">Категории</a>
+							  	<a class="dropdown-item" href="{{ route('products.index') }}">Товары</a>
 								@endif
-							  	<a class="dropdown-item" href="{{ route('user_panel') }}">Личный кабинет</a>
 							  	<!--<a class="dropdown-item" href="#">Настройки</a>-->
                   <a id="logout-link" class="dropdown-item" href="#">Выйти</a>
                   <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
