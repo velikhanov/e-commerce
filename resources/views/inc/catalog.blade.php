@@ -6,11 +6,11 @@
              <li class='has-sub'><a href="#"><span>Каталог</span></a>
                 <ul>
                  @foreach( $catalog as $item )
-                  <li class='has-sub'><a href="#"><img class="catalogimg" src="@if(!is_null($item->img_url)){{$item->img_url}}@else /img/categories/kitchen-utensils.png
+                  <li class='has-sub'><a href="#"><img class="catalogimg" src="@if(!is_null($item)){{$item}}@else /img/categories/kitchen-utensils.png
                   @endif"><span class="cat-text">{{ $item->name }}</span></a>
                    <ul>
                     @foreach( $item->children as $subitem )
-                     <li><a href='/{{ $subitem->url }}/{{ $subitem->url }}'><img class="catalogimg" src="@if(!is_null($subitem->img_url)){{$subitem->img_url}}@else /img/categories/kitchen-utensils.png @endif"><span class="cat-text">{{ $subitem->name }}</span></a></li>
+                     <li><a href='/{{ $subitem->url }}/{{ $subitem->url }}'><img class="catalogimg" src="@if(!is_null($subitem)){{$subitem}}@else /img/categories/kitchen-utensils.png @endif"><span class="cat-text">{{ $subitem->name }}</span></a></li>
                     @endforeach
                    </ul>
                   </li>
