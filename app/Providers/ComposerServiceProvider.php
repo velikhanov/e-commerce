@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Http\ViewComposers\NavigationComposer;
+use App\Http\ViewComposers\UsersPersonalDaraComposer;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,9 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composer(
             'inc.catalog', NavigationComposer::class
+        );
+        View::composer(
+            'auth.inc.catalog', UsersPersonalDaraComposer::class
         );
     }
 }
