@@ -70,13 +70,13 @@
                 </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('categories.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('edit-categories') ? 'activeNavItem' : NULL }}">
+          <a href="{{ route('categories.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/categories') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-pie-chart mr-1 text-primary fa-fw"></i>
                     Категории
                 </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('products.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('edit-products') ? 'activeNavItem' : NULL }}">
+          <a href="{{ route('products.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/products') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-line-chart mr-1 text-primary fa-fw"></i>
                     Товары
                 </a>
