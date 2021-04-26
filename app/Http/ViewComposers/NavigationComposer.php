@@ -23,8 +23,8 @@ class NavigationComposer
             ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
             ->first();
         };
-        $catimg = isset($cat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
-
+        $catimgcoll = collect(isset($cat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
+        $catimg->get();
         foreach ($cat->children as $subcat) {
           if(isset($subcat->img)){
               // code...
@@ -35,7 +35,8 @@ class NavigationComposer
               ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
               ->first();
           };
-          $subcatimg = isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+          $subcatimgcoll = collect(isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
+          $subcatimg->get();
         };
       };
       return $view->with(['catalog' => $catalog, 'catimg' => $catimg, 'subcatimg' => $subcatimg]);
