@@ -48,7 +48,8 @@ class NavigationComposer
 
              $catimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
         };
-        $cat['img_url'] = $catimg; // create a new field called img_url and assign value
+        $cat[] = $catimg; // create a new field called img_url and assign value
+        dd($cat);
         foreach ($cat->children as $subcat) {
           $subcatimg = null;
           if(isset($subcat->img)){
@@ -60,7 +61,7 @@ class NavigationComposer
               ->first();
               $subcatimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
           };
-      $subcat['img_url'] = $subcatimg;
+      $subcat[] = $subcatimg;
         };
       };
       return $view->with(['catalog' => $catalog]);
