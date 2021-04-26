@@ -20,7 +20,7 @@ class UsersPersonalDaraComposer
       ->where('extension', '=', pathinfo($user->img, PATHINFO_EXTENSION))
       ->first();
     $userimg = isset($file['path'])?$file['path']:NULL;
-    isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->get($file['path']):NULL):NULL;
+    // isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->get($file['path']):NULL):NULL;
     };
 
     return $view->with('userimg', $userimg);
