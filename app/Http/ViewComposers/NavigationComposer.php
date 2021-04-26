@@ -36,8 +36,6 @@ class NavigationComposer
       //     $subcatcoll = collect(isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
       //   };
       // };
-      $catarr = array();
-      $subcatarr = array();
       foreach ($catalog as $cat) {
     $catimg = null; //define it here as null
         if(isset($cat->img)){
@@ -48,9 +46,9 @@ class NavigationComposer
             ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
             ->first();
 
-             $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+             $catimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
         };
-        $catarr[] = $catimg; // create a new field called img_url and assign value
+        $cat['img_url'] = $catimg; // create a new field called img_url and assign value
         foreach ($cat->children as $subcat) {
           $subcatimg = null;
           if(isset($subcat->img)){
@@ -60,13 +58,11 @@ class NavigationComposer
               ->where('filename', '=', pathinfo($subcat->img, PATHINFO_FILENAME))
               ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
               ->first();
-              $subcatimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+              $subcatimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
           };
-      $subcatarr[] = $subcatimg;
+      $subcat['img_url'] = $subcatimg;
         };
       };
-      dd($catarr);
-
       return $view->with(['catalog' => $catalog]);
   }
 }
