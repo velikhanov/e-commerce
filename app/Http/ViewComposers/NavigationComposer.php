@@ -12,6 +12,7 @@ class NavigationComposer
   {
       $catalog = Category::with('children')->where('parent_id', '=', NULL)->get();
       //
+      dd($catalog->img);
       if(isset($catalog->img)){
           // $cat = Category::
           // code...
