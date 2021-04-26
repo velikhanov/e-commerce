@@ -20,7 +20,7 @@ class NavigationComposer
         ->where('extension', '=', pathinfo($catalog->img, PATHINFO_EXTENSION))
         ->first();
       };
-     $catimg = isset($catalog->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+     /*$catimg = */dd(isset($catalog->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
       //
       return $view->with(['catalog' => $catalog, 'catimg' => $catimg]);
   }
