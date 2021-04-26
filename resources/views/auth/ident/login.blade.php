@@ -40,7 +40,7 @@
     		   <div class="bottom-action clearfix">
                 <label class="float-left form-check-label"><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember me</label>
                 @if (Route::has('password.request'))
-                  <a href="{{ route('password.request') }}" class="float-right">Forgot Password?</a>
+                  <!-- <a href="{{ route('password.request') }}" class="float-right">Forgot Password?</a> -->
                 @endif
             </div>
       </form>

@@ -82,6 +82,15 @@
                 </a>
         </li>
         @endif
+        <li class="nav-item">
+          <a id="logout-link" href="#" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
+              <i class="fa fa-area-chart mr-1 text-primary fa-fw"></i>
+              Выйти
+          </a>
+          <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
+              @csrf
+          </form>
+        </li>
         <!-- @if(Auth::user()->role === 2)
         <li class="nav-item mb-3">
           <a href="#" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('edit-users') ? 'activeNavItem' : NULL }}">
