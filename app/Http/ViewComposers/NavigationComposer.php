@@ -46,7 +46,7 @@ class NavigationComposer
             ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
             ->first();
 
-             $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+             $catimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
         };
         $cat['img_url'] = $catimg; // create a new field called img_url and assign value
         foreach ($cat->children as $subcat) {
@@ -58,7 +58,7 @@ class NavigationComposer
               ->where('filename', '=', pathinfo($subcat->img, PATHINFO_FILENAME))
               ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
               ->first();
-              $subcatimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+              $subcatimg = collect(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL);
           };
       $subcat['img_url'] = $subcatimg;
         };

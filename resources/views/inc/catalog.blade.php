@@ -4,7 +4,7 @@
       <div class='cssmenu'>
           <ul>
              <li class='has-sub'><a href="#"><span>Каталог</span></a>
-                <ul>
+                <!-- <ul>
                   @foreach( $catalog as $item )
                    <li class='has-sub'><a href="#"><img class="catalogimg" src="{{($item->img && $item->img_url)?$item->img_url:/img/categories/kitchen-utensils.png }}"><span class="cat-text">{{ $item->name }}</span></a>
                       <ul>
@@ -14,6 +14,18 @@
                       </ul>
                    </li>
                    @endforeach
+                </ul> -->
+                <ul>
+                 @foreach( $catalog as $item )
+                  <li class='has-sub'><a href="#"><img class="catalogimg" src="@if(!is_null($item->img_url)){{$item->img_url}}@else /img/categories/kitchen-utensils.png
+                  @endif"><span class="cat-text">{{ $item->name }}</span></a>
+                   <ul>
+                    @foreach( $item->children as $subitem )
+                     <li><a href='/{{ $subitem->url }}/{{ $subitem->url }}'><img class="catalogimg" src="@if(!is_null($subitem->img_url)){{$subitem->img_url}}@else /img/categories/kitchen-utensils.png @endif"><span class="cat-text">{{ $subitem->name }}</span></a></li>
+                    @endforeach
+                   </ul>
+                  </li>
+                 @endforeach
                 </ul>
              </li>
           </ul>
