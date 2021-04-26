@@ -41,14 +41,13 @@ class AdminController extends Controller
       if ($request->hasFile('userimg')){
         //get file google drive
         if(isset($user->img)){
-          $contents = collect(Storage::disk('google')->listContents('/', false));
+          $contents = collect(Storage::disk('google')->listContents('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo/', false));
           $file = $contents
           ->where('type', '=', 'file')
           ->where('filename', '=', pathinfo($user->img, PATHINFO_FILENAME))
           ->where('extension', '=', pathinfo($user->img, PATHINFO_EXTENSION))
           ->first();
-          dd(Storage::disk('google')->listContents('/', false));
-          dd($file['path']);
+          dd($file->path);
           Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL;
           // Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL;
         };
