@@ -11,8 +11,8 @@ class NavigationComposer
   {
       $catalog = Category::with('children')->where('parent_id', '=', NULL)->get();
       //
-      $categories - Category::get();
-      if(isset($catalog->img)){
+      $categories = Category::get();
+      if(isset($categories->img)){
         // $cat = Category::
         $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
         $file = $contents
