@@ -24,7 +24,7 @@ class NavigationComposer
             ->first();
         };
         $catimgcoll = collect(isset($cat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
-        $catimg->get();
+        $catimg= $catimgcoll->get();
         foreach ($cat->children as $subcat) {
           if(isset($subcat->img)){
               // code...
@@ -36,7 +36,7 @@ class NavigationComposer
               ->first();
           };
           $subcatimgcoll = collect(isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
-          $subcatimg->get();
+          $subcatimg = $subcatimgcoll->get();
         };
       };
       return $view->with(['catalog' => $catalog, 'catimg' => $catimg, 'subcatimg' => $subcatimg]);
