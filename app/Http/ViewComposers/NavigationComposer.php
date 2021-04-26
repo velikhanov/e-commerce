@@ -66,6 +66,7 @@ class NavigationComposer
         };
       };
       dd($catarr);
+      
       return $view->with(['catalog' => $catalog]);
   }
 }
