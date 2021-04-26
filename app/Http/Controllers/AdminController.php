@@ -42,7 +42,7 @@ class AdminController extends Controller
         Storage::disk('google')->exists('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo/'.$user->img)?Storage::disk('google')->delete('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo/'.$user->img):NULL;
         $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
         $request->file('userimg')->storeAs('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo', $user->img, 'google');
-        dd(Storage::disk('google')->allFiles());
+        dd(Storage::disk('google')->listContents());
       }
 
       $user->update();
