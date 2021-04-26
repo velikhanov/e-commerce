@@ -33,7 +33,7 @@ class AdminController extends Controller
     public function user_edit(Request $request){
 
       $user = Auth::user();
-
+      dd($user->img);
       $user->name = $request->input('name')?$request->input('name'):Auth::user()->name;
       $user->email = $request->input('email')?$request->input('email'):Auth::user()->email;
       $user->phone = $request->input('phone')?preg_replace('/\s+/', '', str_replace(array( '+', '-', '(', ')' ), '', $request->input('phone'))):(Auth::user()->phone?Auth::user()->phone:NULL);
