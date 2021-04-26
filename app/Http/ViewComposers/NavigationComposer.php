@@ -39,7 +39,7 @@ class NavigationComposer
       foreach ($catalog as $cat) {
     $catimg = null; //define it here as null
         if(isset($cat->img)){
-            $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
+            $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
             $file = $contents
             ->where('type', '=', 'file')
             ->where('filename', '=', pathinfo($cat->img, PATHINFO_FILENAME))
@@ -52,7 +52,7 @@ class NavigationComposer
         foreach ($cat->children as $subcat) {
           $subcatimg = null;
           if(isset($subcat->img)){
-              $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
+              $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
               $file = $contents
               ->where('type', '=', 'file')
               ->where('filename', '=', pathinfo($subcat->img, PATHINFO_FILENAME))
