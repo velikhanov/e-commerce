@@ -12,8 +12,7 @@ class NavigationComposer
   {
       $catalog = Category::with('children')->where('parent_id', '=', NULL)->get();
       //
-      $categories = Category::get();
-      foreach ($categories as $cat) {
+      foreach ($catalog as $cat) {
         if(isset($cat->img)){
             // $cat = Category::
             // code...
@@ -26,7 +25,8 @@ class NavigationComposer
         };
         $catimg = isset($cat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
       };
+      $subcatimg = Category::with('children')->where('parent_id', '<>', NULL)->get();
 
-      return $view->with(['catalog' => $catalog, 'catimg' => $catimg]);
+      return $view->with(['catalog' => $catalog, 'catimg' => $catimg, 'subcatimg' => $subcatimg]);
   }
 }
