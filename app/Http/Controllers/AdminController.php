@@ -42,7 +42,8 @@ class AdminController extends Controller
         //get file google drive
         if($user->img){
           $contents = collect(Storage::disk('google')->listContents('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo/', false));
-          $file = $contents->where('type', '=', 'file')
+          $file = $contents
+          ->where('type', '=', 'file')
           ->where('filename', '=', pathinfo($user->img, PATHINFO_FILENAME))
           ->where('extension', '=', pathinfo($user->img, PATHINFO_EXTENSION))
           ->first();
@@ -51,7 +52,7 @@ class AdminController extends Controller
         Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL;
         $user->img = 'img_'.$user->id.time().'.'.$request->file('userimg')->getClientOriginalExtension();
         $request->file('userimg')->storeAs('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo', $user->img, 'google');
-        // dd(Storage::disk('google')->listContents('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo/', false));
+        dd(Storage::disk('google')->listContents('1wbJ21pzL0XZwQBVe0hqbbDhbqoUCc2Eo/', false));
       }
 
       $user->update();
