@@ -9,7 +9,7 @@ class NavigationComposer
 {
   public function compose(View $view)
   {
-      $catalog = Category::with('children')->where('parent_id', NULL)->get();
+      $catalog = Category::with('children')->where('parent_id', '=', NULL)->get();
       //
       if(isset($catalog->img)){
         // $cat = Category::
@@ -19,8 +19,8 @@ class NavigationComposer
         ->where('filename', '=', pathinfo($catalog->img, PATHINFO_FILENAME))
         ->where('extension', '=', pathinfo($catalog->img, PATHINFO_EXTENSION))
         ->first();
-      $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
       };
+     $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
       //
       return $view->with(['catalog' => $catalog, 'catimg' => $catimg]);
   }
