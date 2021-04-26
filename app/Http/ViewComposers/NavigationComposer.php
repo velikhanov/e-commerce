@@ -36,34 +36,33 @@ class NavigationComposer
       //     $subcatcoll = collect(isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
       //   };
       // };
-      
-    //   foreach ($catalog as $cat) {
-    // $catimg = null; //define it here as null
-    //     if(isset($cat->img)){
-    //         $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
-    //         $file = $contents
-    //         ->where('type', '=', 'file')
-    //         ->where('filename', '=', pathinfo($cat->img, PATHINFO_FILENAME))
-    //         ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
-    //         ->first();
-    //
-    //          $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-    //     };
-    //     $cat['img_url'] = $catimg; // create a new field called img_url and assign value
-    //     foreach ($cat->children as $subcat) {
-    //       $subcatimg = null;
-    //       if(isset($subcat->img)){
-    //           $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
-    //           $file = $contents
-    //           ->where('type', '=', 'file')
-    //           ->where('filename', '=', pathinfo($subcat->img, PATHINFO_FILENAME))
-    //           ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
-    //           ->first();
-    //           $subcatimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-    //       };
-    //   $subcat['img_url'] = $subcatimg;
-    //     };
-    //   };
-      return $view->with(['catalog' => $catalog]);
+      foreach ($catalog as $cat) {
+    $catimg = null; //define it here as null
+        if(isset($cat->img)){
+            $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
+            $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($cat->img, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
+            ->first();
+
+             $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+        };
+        $cat['img_url'] = $catimg; // create a new field called img_url and assign value
+        foreach ($cat->children as $subcat) {
+          $subcatimg = null;
+          if(isset($subcat->img)){
+              $contents = collect(Storage::disk('google')->listContents('askldjfDSKLsOe2sdlKJF/', false));
+              $file = $contents
+              ->where('type', '=', 'file')
+              ->where('filename', '=', pathinfo($subcat->img, PATHINFO_FILENAME))
+              ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
+              ->first();
+              $subcatimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+          };
+      $subcat['img_url'] = $subcatimg;
+        };
+      };
+      return $view->with(['catalog' => $catalog, 'catimg' => $catimg, '$subcatimg' => $subcatimg]);
   }
 }
