@@ -63,6 +63,6 @@ class NavigationComposer
       $subcat['img_url'] = $subcatimg;
         };
       };
-      return $view->with(['catalog' => $catalog, 'catimg' => $catimg, '$subcatimg' => $subcatimg]);
+      return $view->with(['catalog' => $catalog]);
   }
 }
