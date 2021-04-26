@@ -25,9 +25,7 @@ class NavigationComposer
         };
         $catimg = isset($cat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
       };
-      $subcatcollection = Category::with('children')->where('parent_id', '<>', NULL)->get();
-      $subcatimg = [];
-      foreach ($subcatcollection as $subcat) {
+      foreach ($catalog->children as $subcat) {
         if(isset($subcat->img)){
             // $cat = Category::
             // code...
@@ -38,8 +36,8 @@ class NavigationComposer
             ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
             ->first();
         };
-        array_push($subcatimg, isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL);
+        $subcatimg = isset($subcat->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
       };
-      return $view->with(['catalog' => $catalog, 'catimg' => $catimg, 'subcatimg' => $subcatimg]);
+      return $view->with(['catalog' => $catalog, 'catimg' => $catimg]);
   }
 }
