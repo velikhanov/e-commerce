@@ -57,7 +57,7 @@
         @foreach($proditem as $product)
           @foreach($product->products as $item)
             <div class="card">
-              <a class="prodlink" href="/{{ $product->code }}/{{ $product->url }}/{{ $item->url }}"><img class="card-img-top" src="{{!is_null($item->cardImage && $item->img_prod_url)?$item->img_prod_url:'/img/products/no-img.png'}}" alt="Card image cap"></a>
+              <a class="prodlink" href="/{{ $product->code }}/{{ $product->url }}/{{ $item->url }}"><img class="card-img-top" src="{{(!is_null($item->cardImage) && !is_null($item->img_prod_url)) ? $item->img_prod_url : '/img/products/no-img.png'}}" alt="Card image cap"></a>
               <div class="card-body">
                 <a href="/{{ $product->code }}/{{ $product->url }}/{{ $item->url }}"><h5 class="card-title text-center">{{ $item->name }}</h5></a>
                 <div class="prch"><span class="card-text">{{ $item->price }}</span><span class="card-text"><i class="{{ $item->is_available_icon }}"></i>{{ $item->is_available_text }}</span></div><br>
