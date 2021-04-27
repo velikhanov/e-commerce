@@ -120,10 +120,20 @@ class BasketController extends Controller
 
   public function modal_order($id){
       $product = Product::find($id);
+           $prodimg = null; //define it here as null
+            if(isset($product->cardImage->path)){
+              $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+              $file = $contents
+              ->where('type', '=', 'file')
+              ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
+              ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
+              ->first();
+               $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+            };
       return response()->json([
             'modalProdId' => $product->id,
             'name' => $product->name,
-            'img' => $product->cardImage?(Storage::disk('public')->exists('products/'.$product->id.'/'.$product->cardImage->path)?Storage::url('products/'.$product->id.'/'.$product->cardImage->path):'/img/products/no-img.png'):'/img/products/no-img.png',
+            'img' => $product->cardImage?($prodimg):('/img/products/no-img.png'),
             'price' => $product->price
        ]);
   }
