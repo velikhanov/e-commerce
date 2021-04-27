@@ -14,8 +14,8 @@ class MainController extends Controller
 {
   public function index(){
     $proditem = Category::with('products.cardImage')->get();
-      foreach($proditem as $product)
-        foreach($product->products as $prod)
+      foreach($proditem as $product){
+        foreach($product->products as $prod){
          $prodimg = null; //define it here as null
           if(isset($prod->productImage->path)){
             $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
