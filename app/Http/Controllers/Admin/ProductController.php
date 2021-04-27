@@ -103,7 +103,7 @@ class ProductController extends Controller
         foreach ($product->productImage as $prod) {
          $prodimg = null; //define it here as null
           if(isset($prod->path)){
-            $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
+            $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
             $file = $contents
             ->where('type', '=', 'file')
             ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
