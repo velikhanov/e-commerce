@@ -19,7 +19,7 @@
             @endif
 
           <div class="form-group">
-            	<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="E-Mail Address" required autocomplete="email" autofocus>
+            	<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="E-Mail Address" required autocomplete="email" value="{{old('email')}}" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
