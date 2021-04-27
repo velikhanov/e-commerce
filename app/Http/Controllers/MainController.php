@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Request;
+
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Product;
+
 
 class MainController extends Controller
 {
