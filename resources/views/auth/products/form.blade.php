@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                           @endfor
-                          <input type="hidden" id="icount" value="{{ count(is_countable($product->properties) && $product->properties) }}">
+                          <input type="hidden" id="icount" value="{{ (is_countable($product->properties) && count($product->properties)) }}">
                         @endisset
                         @empty($product)
                           @if(Session::has('properties'))
