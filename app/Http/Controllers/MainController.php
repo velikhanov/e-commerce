@@ -24,7 +24,7 @@ class MainController extends Controller
             ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
             ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
             ->first();
-             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
           };
           $prod['img_prod_url'] = $prodimg;
         };
@@ -42,7 +42,7 @@ class MainController extends Controller
         ->where('filename', '=', pathinfo($cat->img, PATHINFO_FILENAME))
         ->where('extension', '=', pathinfo($cat->img, PATHINFO_EXTENSION))
         ->first();
-         $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+         $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/categories/kitchen-utensils.png'):'/img/products/kitchen-utensils.png';
       };
       $cat['img_cats_url'] = $catimg;
       foreach ($cat->products as $prod) {
@@ -54,7 +54,7 @@ class MainController extends Controller
            ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
            ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
            ->first();
-            $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+            $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
          };
          $prod['img_prod_url'] = $prodimg;
       }
@@ -73,7 +73,7 @@ class MainController extends Controller
             ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
             ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
             ->first();
-             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
           };
           $prod['img_prod_url'] = $prodimg;
         };
@@ -92,7 +92,7 @@ class MainController extends Controller
             ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
             ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
             ->first();
-             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
           };
           $prod['img_prod_url'] = $prodimg;
         };

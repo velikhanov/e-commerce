@@ -109,7 +109,7 @@ class ProductController extends Controller
             ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
             ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
             ->first();
-             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
           };
           $prod['img_prod_prev_img'] = $prodimg; // create a new field called img_url and assign value
         };

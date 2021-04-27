@@ -41,7 +41,7 @@ class Cart
         'name' => $item->name,
         'cost' => $item->price,
         'price' => $item->price,
-        'img' => $item->cardImage?$prodimg:NULL
+        'img' => $item->cardImage?$prodimg:'/img/products/no-img.png'
       ];
       if($this->items){
         if(array_key_exists($id, $this->items)){

@@ -82,7 +82,7 @@ class CategoryController extends Controller
           ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
           ->first();
         };
-        $prevcatimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+        $prevcatimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png'):'/img/products/no-img.png';
         return view('auth.categories.form', compact('categories', 'category', 'prevcatimg'));
     }
 

@@ -126,7 +126,7 @@ class BasketController extends Controller
               ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
               ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
               ->first();
-               $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+               $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
             };
       return response()->json([
             'modalProdId' => $product->id,
@@ -147,7 +147,7 @@ class BasketController extends Controller
          ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
          ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
          ->first();
-          $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+          $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
        };
     $selprod['items'] = array(
       $request->id => array(
