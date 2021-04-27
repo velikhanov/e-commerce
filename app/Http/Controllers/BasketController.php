@@ -126,7 +126,7 @@ class BasketController extends Controller
               ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
               ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
               ->first();
-               $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
+               $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
             };
       return response()->json([
             'modalProdId' => $product->id,
@@ -147,7 +147,7 @@ class BasketController extends Controller
          ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
          ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
          ->first();
-          $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):'/img/products/no-img.png'):'/img/products/no-img.png';
+          $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
        };
     $selprod['items'] = array(
       $request->id => array(
@@ -176,7 +176,7 @@ class BasketController extends Controller
     Auth::check()?Auth::user()->orders()->save($order):$order->save();
 
     return response()->json([
-      'notif_text' => 'The order is accepted for processing! Wait for a call!'
+      'notif_text' => 'Your order has been accepted for processing! Wait for a call!'
     ]);
   }
 
