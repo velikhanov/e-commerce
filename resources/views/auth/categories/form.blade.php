@@ -90,7 +90,7 @@
                         </label>
                         <div class="preview d-inline">
                         @if(!is_null($category->img && $prevcatimg))
-                          <img src="{{$prevcatimg ?? NULL}}" alt="Preview images">
+                          <img src="{{$category->img_cat_edit ?? NULL}}" alt="Preview images">
                         @endif
                         </div>
                     </div>

@@ -29,20 +29,7 @@ class MainController extends Controller
         ->first();
          $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
       };
-      $cat['img_cats_url'] = $catimg; // create a new field called img_url and assign value
-     //  foreach ($cat->children as $subcat) {
-     //    $subcatimg = null;
-     //    if(isset($subcat->img)){
-     //        $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
-     //        $file = $contents
-     //        ->where('type', '=', 'file')
-     //        ->where('filename', '=', pathinfo($subcat->img, PATHINFO_FILENAME))
-     //        ->where('extension', '=', pathinfo($subcat->img, PATHINFO_EXTENSION))
-     //        ->first();
-     //        $subcatimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-     //    };
-     // $subcat['img_cats_url'] = $subcatimg;
-     //  };
+      $cat['img_cats_url'] = $catimg;
     };
     return view('categories', compact('categories'));
   }
