@@ -17,9 +17,10 @@
         @else
             <h1>Добавить товар</h1>
         @endisset
-      @foreach ($errors->all() as $error)
+        @include('inc.flash')
+        @foreach ($errors->all() as $error)
            <div class="alert alert-danger text-center mt-2  mb-1">{{$error}}</div>
-      @endforeach
+        @endforeach
         <form method="POST" enctype="multipart/form-data"
               @isset($product)
               action="{{ route('products.update', $product) }}"

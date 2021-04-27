@@ -22,21 +22,21 @@ class BasketController extends Controller
     }
     $oldCart = Session::get('cart');
     $cart = new Cart($oldCart);
-    $product = Product::get();
-      foreach($product as $prod){
-       $prodimg = null; //define it here as null
-        if(isset($prod->cardImage->path)){
-          $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-          $file = $contents
-          ->where('type', '=', 'file')
-          ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
-          ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
-          ->first();
-           $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-        };
-      };
+    // $product = Product::get();
+    //   foreach($product as $prod){
+    //    $prodimg = null; //define it here as null
+    //     if(isset($prod->cardImage->path)){
+    //       $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+    //       $file = $contents
+    //       ->where('type', '=', 'file')
+    //       ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
+    //       ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
+    //       ->first();
+    //        $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+    //     };
+    //   };
 
-    return view('basket', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'prodimg' => $prodimg]);
+    return view('basket', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
   }
 
   public function addCart(Request $request, $id){
@@ -108,21 +108,21 @@ class BasketController extends Controller
 
     $oldCart = Session::get('cart');
     $cart = new Cart($oldCart);
-    $product = Product::get();
-    foreach($product as $prod){
-     $prodimg = null; //define it here as null
-      if(isset($prod->cardImage->path)){
-        $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-        $file = $contents
-        ->where('type', '=', 'file')
-        ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
-        ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
-        ->first();
-         $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-      };
-    };
+    // $product = Product::get();
+    // foreach($product as $prod){
+    //  $prodimg = null; //define it here as null
+    //   if(isset($prod->cardImage->path)){
+    //     $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+    //     $file = $contents
+    //     ->where('type', '=', 'file')
+    //     ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
+    //     ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
+    //     ->first();
+    //      $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+    //   };
+    // };
 
-    return view('order', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'prodimg' => $prodimg]);
+    return view('order', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
   }
 
   public function new_order_place(Request $request){
