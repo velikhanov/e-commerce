@@ -25,7 +25,7 @@
                <button class="btn btn-outline-success ml-2" type="submit"><i class="fas fa-shopping-basket"></i>Корзина</button>
              </form>-->
       <a href="{{ Route('basket') }}" class="basket-button">
-         <span class="prodcount">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</span><i class="fas fa-shopping-basket"></i><span class="basket-text">Корзина</span>
+         <span class="prodcount">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</span><i class="fas fa-shopping-basket"></i><span class="basket-text">Yout cart</span>
       </a>
   </div>
 </nav>

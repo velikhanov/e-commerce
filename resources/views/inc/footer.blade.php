@@ -37,7 +37,7 @@
             <div class="col-lg-4 col-sm-6 text-center newsletter">
                 <h4>Subscribe to our newsletter</h4>
                 <p>Enter your E-mail</p>
-                <form action="" method="post"><input type="email" name="email" placeholder="Will be implemented later" /><input readonly type="submit" value="Subscribe" /></form>
+                <form action="" method="post"><input type="email" name="email" placeholder="Will be implemented later" readonly/><input type="submit" value="Subscribe" /></form>
 
                 <div class="social-links mt-3">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
