@@ -147,7 +147,7 @@
                   <div class="row">
                       <div class="col-lg-12">
                           @isset($product)
-                            @for ($i=0; $i < count($product->properties) ?? ''; $i++)
+                            @for ($i=0; $i < (is_countable($product->properties) && count($product->properties)); $i++)
                             <div id="inputFormRow">
                                 <div class="input-group mb-3">
                                       <input type="text" name="properties[{{ $i }}][key]" value="{{ $product->properties[$i]['key'] ?? '' }}" class="form-control m-input ml-3" placeholder="Свойство" autocomplete="off">
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                           @endfor
-                          <input type="hidden" id="icount" value="{{count($product->properties ?? '0')}}">
+                          <input type="hidden" id="icount" value="{{is_countable($product->properties) && count($product->properties)}}">
                         @endisset
                         @empty($product)
                           @if(Session::has('properties'))
