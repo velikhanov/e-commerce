@@ -184,12 +184,12 @@ class ProductController extends Controller
     {
       if($product->productImage){
         foreach ($product->productImage as $prod) {
-          if(isset($prod->img)){
+          if(isset($prod->path)){
             $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
             $file = $contents
             ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($prod->img, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($prod->img, PATHINFO_EXTENSION))
+            ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
             ->first();
           };
           isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
