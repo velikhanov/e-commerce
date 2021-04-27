@@ -20,7 +20,7 @@
               <div class="productslider__big">
               @if($prod->productImage->isNotEmpty())
                 @foreach($prod->productImage as $imgitem)
-                <a href="{{$imgitem->img_prod_url ?? NULL}}" data-fancybox="gallery-1"><img class="prodimgbig" src="{{$imgitem->img_prod_url ?? NULL}}"></a>
+                <a href="{{$imgitem->img_prod_url ?? NULL}}" data-fancybox="gallery-1"><img class="prodimgbig" src="{{$imgitem->img_prod_url ?? '/img/products/no-img.png'}}"></a>
                 @endforeach
               @else
               <a href="/img/products/no-img.png" data-fancybox="gallery-1"><img class="prodimgbig" src="/img/products/no-img.png"></a>
@@ -29,7 +29,7 @@
               <div class="productslider__small">
               @if($prod->productImage->isNotEmpty())
                 @foreach($prod->productImage as $imgitem)
-                <div><img class="prodimgsmall" src="{{$imgitem->img_prod_url ?? NULL}}"></div>
+                <div><img class="prodimgsmall" src="{{$imgitem->img_prod_url ?? '/img/products/no-img.png'}}"></div>
                 @endforeach
               @endif
               </div>
