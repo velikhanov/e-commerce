@@ -27,7 +27,7 @@
             <tbody>
                 @foreach($products as $product)
               <tr>
-                <th scope="row"><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($product['img'] && $prodimg))?($prodimg):('/img/products/no-img.png')}}"><span class="basket-prod-name">{{ $product['name'] }}</span></a></th>
+                <th scope="row"><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($prodimg))?($prodimg):('/img/products/no-img.png')}}"><span class="basket-prod-name">{{ $product['name'] }}</span></a></th>
                 <td>
                   <div class="btn-group form-inline">
                       <div class="prodcount">{{ $product['qty'] }}</div>

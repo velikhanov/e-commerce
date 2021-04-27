@@ -39,7 +39,7 @@
                           @foreach($products as $product)
                           <h6><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}">{{ $product['name'] }}</a></h6>
                           <div class="row item">
-                              <div class="col-4 align-self-center"><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}"><img class="basketimg mr-1" src="@isset($product['img']){{Storage::disk('public')->exists('products/'.$product['id'].'/'.$product['img'])?Storage::url('products/'.$product['id'].'/'.$product['img']):'/img/products/no-img.png'}}@else{{'/img/products/no-img.png'}}@endisset"></a></div>
+                              <div class="col-4 align-self-center"><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($prodimg))?($prodimg):('/img/products/no-img.png')}}"></a></div>
                               <div class="col-8">
                                   <div class="row"><b>{{ $product['cost'] }} AZN</b></div>
                                   <div class="row"><div class="btn-group form-inline">
