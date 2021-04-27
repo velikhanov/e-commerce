@@ -83,8 +83,7 @@ class CategoryController extends Controller
           ->first();
         };
         $prevcatimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
-        $categories['img_cat_edit'] = $prevcatimg;
-        return view('auth.categories.form', compact('categories', 'category'));
+        return view('auth.categories.form', compact('categories', 'category', 'prevcatimg'));
     }
 
     /**
