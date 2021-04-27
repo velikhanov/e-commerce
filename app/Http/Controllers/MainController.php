@@ -17,12 +17,12 @@ class MainController extends Controller
       foreach($proditem as $product){
         foreach($product->products as $prod){
          $prodimg = null; //define it here as null
-          if(isset($prod->productImage->path)){
+          if(isset($prod->cardImage)){
             $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
             $file = $contents
             ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($prod->productImage->path, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($prod->productImage->path, PATHINFO_EXTENSION))
+            ->where('filename', '=', pathinfo($prod->cardImage, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($prod->cardImage, PATHINFO_EXTENSION))
             ->first();
              $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
           };
