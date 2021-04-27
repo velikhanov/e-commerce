@@ -89,9 +89,9 @@
                             Загрузить <input type="file" style="display: none;" name="catimg" id="catimg">
                         </label>
                         <div class="preview d-inline">
-                        @isset($category->img)
+                        @if(!is_null($category->img && $prevcatimg))
                           <img src="{{$prevcatimg}}" alt="Preview images">
-                        @endisset
+                        @endif
                         </div>
                     </div>
                 </div>
