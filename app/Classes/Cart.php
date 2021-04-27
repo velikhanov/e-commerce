@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 
 class Cart
@@ -40,7 +41,7 @@ class Cart
         'name' => $item->name,
         'cost' => $item->price,
         'price' => $item->price,
-        // 'img' => $item->cardImage?$prodimg:NULL
+        'img' => $item->cardImage?$prodimg:NULL
       ];
       if($this->items){
         if(array_key_exists($id, $this->items)){
