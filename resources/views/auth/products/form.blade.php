@@ -127,7 +127,7 @@
                             <div class="preview d-flex flex-wrap">
                           @foreach($product->productImage as $prodimg)
                             <a class="removeImgBtn" href="#">
-                              <img src="{{$prodimg->img_prod_prev_img ?? NULL}}" alt="Preview images">
+                              <img src="{{$product->img_prod_prev_img ?? NULL}}" alt="Preview images">
                               <span>Кликните для удаления</span>
                               <div class="d-none">{{$prodimg->path}}</div>
                               <input type="hidden" name="imgfordel[]">

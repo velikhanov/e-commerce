@@ -113,7 +113,6 @@ class ProductController extends Controller
           };
           $prod['img_prod_prev_img'] = $prodimg; // create a new field called img_url and assign value
         };
-        $prevprodimg = isset($prod->path)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
         return view('auth.products.form', compact('product' ,'categories'));
     }
 
