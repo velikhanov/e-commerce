@@ -65,7 +65,7 @@ class ProductController extends Controller
               $dataimg['position'] = $i++;
               $dataimg['updated_at'] = Carbon::now();
               $dataimg['created_at'] = Carbon::now();
-              $prodimg->storeAs('products/'.$product->id.'/', $dataimg['path']);
+              $prodimg->storeAs('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX', $dataimg['path'], 'google');
               ProductImage::create($dataimg);
             };
           };
