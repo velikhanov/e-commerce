@@ -74,7 +74,16 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $categories = Category::where('parent_id', NULL)->get();
-        return view('auth.categories.form', compact('categories', 'category'));
+        if(isset($category->img)){
+          $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
+          $file = $contents
+          ->where('type', '=', 'file')
+          ->where('filename', '=', pathinfo($category->img, PATHINFO_FILENAME))
+          ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
+          ->first();
+        };
+        $prevcatimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+        return view('auth.categories.form', compact('categories', 'category', 'prevcatimg'));
     }
 
     /**

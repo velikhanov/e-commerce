@@ -90,7 +90,7 @@
                         </label>
                         <div class="preview d-inline">
                         @isset($category->img)
-                          <img src="{{Storage::url('categories/'.'/'.$category->img)}}" alt="Preview images">
+                          <img src="{{$prevcatimg}}" alt="Preview images">
                         @endisset
                         </div>
                     </div>
