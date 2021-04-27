@@ -84,7 +84,7 @@
                                       <tbody>
                                           @foreach($order->cart->items as $item)
                                         <tr>
-                                          <th scope="row"><a href="/{{ $item['code_cat'] }}/{{ $item['url_cat'] }}/{{ $item['prod_url'] }}"><img class="basketimg mr-1" src="@isset($item['img']){{Storage::disk('public')->exists('products/'.$item['id'].'/'.$item['img'])?Storage::url('products/'.$item['id'].'/'.$item['img']):'/img/products/no-img.png'}}@else{{'/img/products/no-img.png'}}@endisset"><span class="basket-prod-name">{{ Str::limit($item['name'], 20) }}</span></a></th>
+                                          <th scope="row"><a href="/{{ $item['code_cat'] }}/{{ $item['url_cat'] }}/{{ $item['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($item['img']))?($item['img']):('/img/products/no-img.png')}}"><span class="basket-prod-name">{{ Str::limit($item['name'], 20) }}</span></a></th>
                                           <td class="text-center"><div class="prodcount">{{$item['qty']}}</div></td>
                                           <td class="text-right">{{$item['cost']}}AZN</td>
                                         </tr>
