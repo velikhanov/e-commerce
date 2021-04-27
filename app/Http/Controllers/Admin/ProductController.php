@@ -138,12 +138,12 @@ class ProductController extends Controller
         if(isset($request->imgfordel)){
           foreach($request->imgfordel as $del) {
 
-              if(isset($del->img)){
+              if(isset($del)){
                 $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
                 $file = $contents
                 ->where('type', '=', 'file')
-                ->where('filename', '=', pathinfo($del->img, PATHINFO_FILENAME))
-                ->where('extension', '=', pathinfo($del->img, PATHINFO_EXTENSION))
+                ->where('filename', '=', pathinfo($del, PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($del, PATHINFO_EXTENSION))
                 ->first();
               };
               isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
