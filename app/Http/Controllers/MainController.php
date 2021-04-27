@@ -39,15 +39,19 @@ class MainController extends Controller
   }
   public function product($code, $url, $suburl){
     $proditem = Product::where('url', $suburl)->get();
-    // if(isset($proditem->img)){
-    //   $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-    //   $file = $contents
-    //   ->where('type', '=', 'file')
-    //   ->where('filename', '=', pathinfo($proditem->img, PATHINFO_FILENAME))
-    //   ->where('extension', '=', pathinfo($proditem->img, PATHINFO_EXTENSION))
-    //   ->first();
-    // };
-    // $prodimg = isset($proditem->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+      foreach ($proditem->productImage as $prod) {
+       $prodimg = null; //define it here as null
+        if(isset($prod->path)){
+          $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+          $file = $contents
+          ->where('type', '=', 'file')
+          ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
+          ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
+          ->first();
+           $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+        };
+        $prod['img_prod_url'] = $prodimg;
+      };
     return view('products', compact('proditem'));
   }
   public function paydel(){
