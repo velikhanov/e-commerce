@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title-admin', 'Восстановление пароля')
+@section('title', 'Password reset')
 
 @section('content')
 <section class="auth-bg">

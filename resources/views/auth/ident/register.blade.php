@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title-admin', 'Sing up')
+@section('title', 'Sing up')
 
 @section('content')
 <section class="auth-bg">
