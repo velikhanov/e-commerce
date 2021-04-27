@@ -14,7 +14,7 @@
      @foreach($categories as $category)
         <div class="col-lg-2 col-md-4 col-sm-6">
             <a href="/{{ Request::is('categories') ? $category->url : $category->code}}{{ Request::is('categories') ? '' : '/' . $category->url }}" class="btn btn-lg btn-success catbtn" type="button">
-              <img class="catbtnimg" src="/img/categories/{{ $category->img }}">
+              <img class="catbtnimg" src="{{ $category->img_cats_url }}">
             </a>
             <h6 class="text-center text-success">{{ $category->name }}</h6>
         </div>
