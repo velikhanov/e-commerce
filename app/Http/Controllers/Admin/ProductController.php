@@ -100,16 +100,21 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::where('parent_id', '<>', NULL)->get();
-        if(isset($product->category->img)){
-          $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-          $file = $contents
-          ->where('type', '=', 'file')
-          ->where('filename', '=', pathinfo($product->category->img, PATHINFO_FILENAME))
-          ->where('extension', '=', pathinfo($product->category->img, PATHINFO_EXTENSION))
-          ->first();
+        foreach ($product->productImage as $prod) {
+         $prodimg = null; //define it here as null
+          if(isset($prod->img)){
+            $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
+            $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($prod->img, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($prod->img, PATHINFO_EXTENSION))
+            ->first();
+             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+          };
+          $prod['img_prod_prev_img'] = $prodimg; // create a new field called img_url and assign value
         };
-        $prevprodimg = isset($product->category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
-        return view('auth.products.form', compact('product' ,'categories', 'prevprodimg'));
+        $prevprodimg = isset($prod->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+        return view('auth.products.form', compact('product' ,'categories'));
     }
 
     /**
