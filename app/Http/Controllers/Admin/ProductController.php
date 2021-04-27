@@ -100,7 +100,16 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::where('parent_id', '<>', NULL)->get();
-        return view('auth.products.form', compact('product' ,'categories'));
+        if(isset($product->category->img)){
+          $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+          $file = $contents
+          ->where('type', '=', 'file')
+          ->where('filename', '=', pathinfo($product->category->img, PATHINFO_FILENAME))
+          ->where('extension', '=', pathinfo($product->category->img, PATHINFO_EXTENSION))
+          ->first();
+        };
+        $prevprodimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+        return view('auth.products.form', compact('product' ,'categories', 'prevprodimg'));
     }
 
     /**
@@ -124,7 +133,17 @@ class ProductController extends Controller
         $product->update($data);
         if(isset($request->imgfordel)){
           foreach($request->imgfordel as $del) {
-            Storage::disk('public')->exists('products/'.$product->id.'/'.$del)?Storage::disk('public')->delete('products/'.$product->id.'/'.$del):NULL;
+
+              if(isset($del->img)){
+                $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+                $file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($del->img, PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($del->img, PATHINFO_EXTENSION))
+                ->first();
+              };
+              isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
+
             ProductImage::where('path', $del)->delete();
           };
           $editpos = 1;
@@ -144,7 +163,7 @@ class ProductController extends Controller
             $dataimg['position'] = $i++;
             $dataimg['updated_at'] = Carbon::now();
             $dataimg['created_at'] = Carbon::now();
-            $prodimg->storeAs('products/'.$product->id.'/', $dataimg['path']);
+            $prodimg->storeAs('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX', $dataimg['path'], 'google');
             ProductImage::create($dataimg);
           };
         };
@@ -161,7 +180,15 @@ class ProductController extends Controller
     {
       if($product->productImage){
         foreach ($product->productImage as $prod) {
-          Storage::disk('public')->exists('products/'.$product->id.'/'.$prod->path)?Storage::disk('public')->delete('products/'.$product->id.'/'.$prod->path):NULL;
+          if(isset($prod->img)){
+            $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+            $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($prod->img, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($prod->img, PATHINFO_EXTENSION))
+            ->first();
+          };
+          isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
           $prod->delete();
         }
       }
