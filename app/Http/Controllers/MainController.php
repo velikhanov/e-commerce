@@ -14,6 +14,21 @@ class MainController extends Controller
 {
   public function index(){
     $proditem = Category::with('products.cardImage')->get();
+      foreach ($proditem->products as $prodit) {
+        foreach ($prodit->productImage as $prod) {
+         $prodimg = null; //define it here as null
+          if(isset($prod->path)){
+            $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+            $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
+            ->first();
+             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+          };
+          $prod['img_prod_url'] = $prodimg;
+        };
+      };
     return view('index', compact('proditem'));
   }
   public function categories($code){
