@@ -90,9 +90,17 @@ class CategoryController extends Controller
 
         $request->parent_id == NULL ? $data['code'] = 'categories' : $data['code'] = $request->code;
         if ($request->hasFile('catimg')){
-          Storage::disk('public')->exists('categories/'.$category->img)?Storage::disk('public')->delete('categories/'.$category->img):NULL;
+          if(isset($category->img)){
+            $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
+            $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($category->img, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
+            ->first();
+          isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
+          };
           $data['img'] = 'img_'.rand(1, 999).time().'.'.$request->file('catimg')->getClientOriginalExtension();
-          $request->file('catimg')->storeAs('categories', $data['img']);
+          $request->file('catimg')->storeAs('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze', $data['img'], 'google');
         }
         $data['updated_at'] = Carbon::now();
 
@@ -109,7 +117,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-      Storage::disk('public')->exists('categories/'.$category->img)?Storage::disk('public')->delete('categories/'.$category->img):NULL;
+      if(isset($category->img)){
+        $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
+        $file = $contents
+        ->where('type', '=', 'file')
+        ->where('filename', '=', pathinfo($category->img, PATHINFO_FILENAME))
+        ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
+        ->first();
+      isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
+      };
       $category->delete();
       return redirect()->route('categories.index')->with('danger', 'Категория '.$category->name.' успешно удалена!');
     }

@@ -15,9 +15,7 @@ class Category extends Model
     'name',
     'code',
     'url',
-    'img',
-    'updated_at',
-    'created_at'
+    'img'
   ];
   protected $table = 'categories';
 
