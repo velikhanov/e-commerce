@@ -43,7 +43,7 @@ class Product extends Model
   }
   public function getIsAvailableTextAttribute()
   {
-      return $this->status === true ? 'В наличии' : 'Нет в наличии';
+      return $this->status === true ? 'In stock' : 'Not available';
   }
   public function getIsAvailableIconAttribute()
   {

@@ -19,7 +19,7 @@
             @endif
 
           <div class="form-group">
-            	<input id="email" type="email" onclick="setPos();" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="E-Mail Address" required autocomplete="email" value="{{old('email')}}" autofocus>
+            	<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="E-Mail Address" required autocomplete="email" value="{{old('email')}}" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -47,7 +47,4 @@
       <h6 class="text-center">Don't have an account? <a href="{{ route('register') }}">Sign up here!</a></h6>
   </div>
 </section>
-@endsection
-@section('pagesjs')
-<script src="/js/cursorpos.js"></script>
 @endsection
