@@ -108,7 +108,7 @@ class BasketController extends Controller
 
     $oldCart = Session::get('cart');
     $cart = new Cart($oldCart);
-
+    $product = Product::get();
     foreach($product as $prod){
      $prodimg = null; //define it here as null
       if(isset($prod->cardImage->path)){
