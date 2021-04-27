@@ -45,6 +45,19 @@ class MainController extends Controller
          $catimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
       };
       $cat['img_cats_url'] = $catimg;
+      foreach ($cat->products as $prod) {
+        $prodimg = null; //define it here as null
+         if(isset($prod->cardImage->path)){
+           $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+           $file = $contents
+           ->where('type', '=', 'file')
+           ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
+           ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
+           ->first();
+            $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+         };
+         $prod['img_prod_url'] = $prodimg;
+      }
     };
     return view('categories', compact('categories'));
   }
