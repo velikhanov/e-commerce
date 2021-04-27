@@ -23,7 +23,16 @@ class MainController extends Controller
   }
   public function product($code, $url, $suburl){
     $proditem = Product::where('url', $suburl)->get();
-    return view('products', compact('proditem'));
+    if(isset($proditem->category->img)){
+      $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+      $file = $contents
+      ->where('type', '=', 'file')
+      ->where('filename', '=', pathinfo($proditem->category->img, PATHINFO_FILENAME))
+      ->where('extension', '=', pathinfo($proditem->category->img, PATHINFO_EXTENSION))
+      ->first();
+    };
+    $prodimg = isset($proditem->category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+    return view('products', compact('proditem', 'prodimg'));
   }
   public function paydel(){
     return view('paydel');
