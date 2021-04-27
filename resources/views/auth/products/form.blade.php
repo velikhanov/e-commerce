@@ -127,7 +127,7 @@
                             <div class="preview d-flex flex-wrap">
                           @foreach($product->productImage as $prodimg)
                             <a class="removeImgBtn" href="#">
-                              <img src="{{Storage::url('products/'.$product->id.'/'.$prodimg->path)}}" alt="Preview images">
+                              <img src="{{$prevprodimg ?? NULL}}" alt="Preview images">
                               <span>Кликните для удаления</span>
                               <div class="d-none">{{$prodimg->path}}</div>
                               <input type="hidden" name="imgfordel[]">
