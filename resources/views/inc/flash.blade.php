@@ -12,21 +12,21 @@
     <div class="col-lg-12">
     @if(Session::has('inc-product'))
       <p class="alert alert-success text-center mt-2  mb-1">
-        Вы увеличили количество товара <strong> {{ Session::get('inc-product') }} </strong> на 1
+        You have increased the quantity of the product <strong> {{ Session::get('inc-product') }} </strong> by 1
       </p>
     @endif
     </div>
     <div class="col-lg-12">
     @if(Session::has('red-product'))
       <p class="alert alert-danger text-center mt-2  mb-1">
-        Вы уменьшили количество товара <strong> {{ Session::get('red-product') }} </strong> на 1
+        You have reduced the quantity of the product <strong> {{ Session::get('red-product') }} </strong> by 1
       </p>
     @endif
     </div>
     <div class="col-lg-12">
     @if(Session::has('del-product'))
     <p class="alert alert-danger text-center mt-2  mb-1">
-      Товара <strong> {{ Session::get('del-product') }} </strong> полностью удален из корзины
+      Product <strong> {{ Session::get('del-product') }} </strong> has been completely removed from the cart
     </p>
     @endif
     </div>

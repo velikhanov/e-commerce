@@ -11,25 +11,25 @@
 			<div class="collapse navbar-collapse" id="nvbCollapse">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item pl-1 {{ Request::is('/') ? 'active' : '' }}">
-						<a class="nav-link" href="{{ route('index') }}"><i class="fa fa-home fa-fw mr-1"></i>Главная<span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="{{ route('index') }}"><i class="fa fa-home fa-fw mr-1"></i>Main<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item pl-1 {{ Request::is('paydel') ? 'active' : '' }}">
-							<a class="nav-link" href="{{ route('paydel') }}"><i class="fas fa-money-bill-alt fa-fw mr-1"></i>Оплата и доставка</a>
+							<a class="nav-link" href="{{ route('paydel') }}"><i class="fas fa-money-bill-alt fa-fw mr-1"></i>Payment and delivery</a>
 					</li>
 					<li class="nav-item pl-1 {{ Request::is('contacts') ? 'active' : '' }}">
-						<a class="nav-link" href="{{ route('contacts') }}"><i class="fa fa-phone fa-fw fa-rotate-180 mr-1"></i>Контакты</a>
+						<a class="nav-link" href="{{ route('contacts') }}"><i class="fa fa-phone fa-fw fa-rotate-180 mr-1"></i>Contacts</a>
 					</li>
 					<li class="nav-item pl-1 {{ Request::is('aboutus') ? 'active' : '' }}">
-						<a class="nav-link" href="{{ route('aboutus') }}"><i class="fa fa-info-circle fa-fw mr-1"></i>О нас</a>
+						<a class="nav-link" href="{{ route('aboutus') }}"><i class="fa fa-info-circle fa-fw mr-1"></i>About us</a>
 					</li>
 					@guest
 					@if(Route::has('register'))
 					<li class="nav-item pl-1">
-						<a class="nav-link" href="{{ route('register') }}"><i class="fas fa-user-plus fa-fw mr-1"></i>Регистрация</a>
+						<a class="nav-link" href="{{ route('register') }}"><i class="fas fa-user-plus fa-fw mr-1"></i>Sign up</a>
 					</li>
 					@endif
 					<li class="nav-item pl-1">
-						<a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in fa-fw mr-1"></i>Войти</a>
+						<a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in fa-fw mr-1"></i>Sign in</a>
 					</li>
 					@else
 					<li class="nav-item dropdown">
@@ -37,14 +37,14 @@
                   {{ Auth::user()->name }} <span class="caret"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right logout" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{{ route('user_panel') }}">Личный кабинет</a>
+								<a class="dropdown-item" href="{{ route('user_panel') }}">Personal area</a>
 								@if(Auth::user()->role)
-							  	<a class="dropdown-item" href="{{ route('admin_order') }}">Заказы</a>
-							  	<a class="dropdown-item" href="{{ route('categories.index') }}">Категории</a>
-							  	<a class="dropdown-item" href="{{ route('products.index') }}">Товары</a>
+							  	<a class="dropdown-item" href="{{ route('admin_order') }}">Orders</a>
+							  	<a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a>
+							  	<a class="dropdown-item" href="{{ route('products.index') }}">Products</a>
 								@endif
 							  	<!--<a class="dropdown-item" href="#">Настройки</a>-->
-                  <a id="logout-link" class="dropdown-item" href="#">Выйти</a>
+                  <a id="logout-link" class="dropdown-item" href="#">Log out</a>
                   <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
                       @csrf
                   </form>

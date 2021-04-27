@@ -56,6 +56,6 @@ class AdminController extends Controller
 
       $user->update();
 
-      return redirect()->back()->with('success', 'Ваши данные успешно обновлены!');
+      return redirect()->back()->with('success', 'Your data has been successfully updated!');
     }
 }

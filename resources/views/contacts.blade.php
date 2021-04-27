@@ -4,24 +4,24 @@
 <link rel="stylesheet" href="/css/main/contacts.css">
 @endsection
 
-@section('title', 'Контакты')
+@section('title', 'Contacts')
 
 @section('content')
 <section class="section">
   <div class="container">
-      <h1 class="text-center text-secondary mt-3 mb-5">Контакты</h1>
+      <h1 class="text-center text-secondary mt-3 mb-5">Contacts</h1>
       <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-12">
-            <h3><strong>Телефоны компании:</strong></h3><br>
+            <h3><strong>Company phones:</strong></h3><br>
             <h5><em class="font-italic num">+(994)12-342-75-39</em></h5><br>
             <h5><em class="font-italic num">+(994)12-342-71-32</em></h5>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12">
             <h3><strong>Режим работы:</strong></h3>
-            <p>Заказы по телефонам, принимаются:
-                понедельник – пятница: с 10:00 до 19:00,
-                суббота, воскресенье: выходной.
-            <h5 class="font-weight-bold font-italic">Заказы через Корзину сайта принимаются круглосуточно и обрабатываются в ближайшее рабочее время</h5></p>
+            <p>Orders by phone are accepted:
+                Monday - Friday: from 10:00 to 19:00,
+                Saturday, Sunday: closed.
+            <h5 class="font-weight-bold font-italic">Orders through the website shopping cart are accepted around the clock and processed in the nearest working hours</h5></p>
         </div>
       </div>
           <h3 class="text-center font-italic mt-3"><strong>E-mail:</strong></h3>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title-admin', 'Регистрация')
+@section('title-admin', 'Sing up')
 
 @section('content')
 <section class="auth-bg">
@@ -53,7 +53,7 @@
 
            </div>
            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
            </div>
       </form>
       <h6 class="text-center">Already have an account? <a href="{{ route('login') }}">Login here!</a></h6>

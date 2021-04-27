@@ -51,7 +51,7 @@ class CategoryController extends Controller
       $data['updated_at'] = Carbon::now();
       $data['created_at'] = Carbon::now();
       $category = Category::create($data);
-      return redirect()->route('categories.index')->with('success', 'Категория '.$category->name.' успешно добавлена!');
+      return redirect()->route('categories.index')->with('success', 'Category '.$category->name.' added successfully!');
     }
 
     /**
@@ -115,7 +115,7 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        return redirect()->route('categories.edit', $category)->with('success', 'Категория '.$category->name.' успешно обновлена!');
+        return redirect()->route('categories.edit', $category)->with('success', 'Category '.$category->name.' successfully updated!');
     }
 
     /**
@@ -136,6 +136,6 @@ class CategoryController extends Controller
       isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
       };
       $category->delete();
-      return redirect()->route('categories.index')->with('danger', 'Категория '.$category->name.' успешно удалена!');
+      return redirect()->route('categories.index')->with('danger', 'Category '.$category->name.' successfully deleted!');
     }
 }

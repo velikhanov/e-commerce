@@ -5,17 +5,17 @@
 @endsection
 
 @isset($category)
-    @section('title', 'Редактировать товар ' . $category->name)
+    @section('title-admin', 'Edit category ' . $category->name)
 @else
-    @section('title', 'Создать товар')
+    @section('title-admin', 'Create category')
 @endisset
 
 @section('content-admin')
     <div class="col-md-12">
         @isset($category)
-            <h1>Редактировать категорию <b>{{ $category->name }}</b></h1>
+            <h1>Edit category <b>{{ $category->name }}</b></h1>
         @else
-            <h1>Добавить категорию</h1>
+            <h1>Create category</h1>
         @endisset
         @include('inc.flash')
       @foreach ($errors->all() as $error)
@@ -35,7 +35,7 @@
                 @csrf
                 <br>
                 <div class="input-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Название: </label>
+                    <label for="name" class="col-sm-2 col-form-label">Name: </label>
                     <div class="col-sm-6">
 
                         <input type="text" class="form-control" name="name" id="name"
@@ -44,7 +44,7 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="category_id" class="col-sm-2 col-form-label">Отношение: </label>
+                    <label for="category_id" class="col-sm-2 col-form-label">Relation: </label>
                     <div class="col-sm-6">
 
                         <select name="parent_id" id="parent_id" class="form-control">
@@ -67,7 +67,7 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="prodimg" class="col-sm-2 col-form-label">Категория: </label>
+                    <label for="prodimg" class="col-sm-2 col-form-label">Category: </label>
                     <div class="col-sm-10">
                             <input type="text" name="code" id="code" value="@empty($category){{old('code')}}@endempty @isset($category){{ $category->code }}@endisset">
                         </div>
@@ -75,7 +75,7 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="prodimg" class="col-sm-2 col-form-label">Подкатегория: </label>
+                    <label for="prodimg" class="col-sm-2 col-form-label">Subcategory: </label>
                     <div class="col-sm-10">
                             <input type="text" name="url" id="url" value="@empty($category){{old('url')}}@endempty @isset($category){{ $category->url }}@endisset">
                         </div>
@@ -83,10 +83,10 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="prodimg" class="col-sm-2 col-form-label">Картинка: </label>
+                    <label for="prodimg" class="col-sm-2 col-form-label">Image: </label>
                     <div class="col-sm-10">
                         <label class="btn btn-dark btn-file">
-                            Загрузить <input type="file" style="display: none;" name="catimg" id="catimg">
+                            Upload <input type="file" style="display: none;" name="catimg" id="catimg">
                         </label>
                         <div class="preview d-inline">
                         @if(!is_null($category->img && $prevcatimg))
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-success">Сохранить</button>
+                <button class="btn btn-success">Save</button>
             </div>
         </form>
     </div>

@@ -13,31 +13,31 @@
             </div>
 
             <div class="col-lg-3 col-sm-6 text-center footer-menus">
-                <h4>Полезные ссылки</h4>
+                <h4>Useful links</h4>
                 <ul>
-                    <li><i class="fas fa-check"></i> <a href="#">Главная</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">О нас</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">Услуги</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">Условия</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">Конфиденциальность</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Main</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">About us</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Services</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Conditions</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Confidentiality</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-2 col-sm-6 text-center footer-menus">
-                <h4>Наши услуги</h4>
+                <h4>Our services</h4>
                 <ul>
-                    <li><i class="fas fa-check"></i> <a href="#">Что то</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">Еще что то</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">И еще</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">Это тоже</a></li>
-                    <li><i class="fas fa-check"></i> <a href="#">Позже</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Something</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Something else</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Something else</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Something else</a></li>
+                    <li><i class="fas fa-check"></i> <a href="#">Something else</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-4 col-sm-6 text-center newsletter">
-                <h4>Подпишитесь на расслку новостей</h4>
-                <p>Введите свой E-mail</p>
-                <form action="" method="post"><input type="email" name="email" placeholder="example@gmail.com" /><input type="submit" value="Subscribe" /></form>
+                <h4>Subscribe to our newsletter</h4>
+                <p>Enter your E-mail</p>
+                <form action="" method="post"><input type="email" name="email" placeholder="Will be implemented later" /><input readonly type="submit" value="Subscribe" /></form>
 
                 <div class="social-links mt-3">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>

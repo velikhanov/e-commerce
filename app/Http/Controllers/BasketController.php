@@ -35,7 +35,7 @@ class BasketController extends Controller
 
     return response()->json([
          'total_quantity' => Session::has('cart') ? Session::get('cart')->totalQty : '0',
-         'notif_text' => 'Продукт ' .'<strong>' . $product->name .'</strong>' . ' добавлен в корзину'
+         'notif_text' => 'Product ' .'<strong>' . $product->name .'</strong>' . ' added to cart!'
      ]);
   }
 
@@ -113,7 +113,7 @@ class BasketController extends Controller
 
     Auth::check()?Auth::user()->orders()->save($order):$order->save();
     Session::forget('cart');
-    return redirect()->route('basket')->with('success', 'Заказ принят в обработку! Ожидайте звонка!');
+    return redirect()->route('basket')->with('success', 'The order is accepted for processing! Wait for a call!');
   }
 
   public function modal_order($id){
@@ -176,7 +176,7 @@ class BasketController extends Controller
     Auth::check()?Auth::user()->orders()->save($order):$order->save();
 
     return response()->json([
-      'notif_text' => 'Ваш заказ принят в обработку! Ожидайте звонка!'
+      'notif_text' => 'The order is accepted for processing! Wait for a call!'
     ]);
   }
 

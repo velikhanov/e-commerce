@@ -3,7 +3,7 @@
   <div class="container">
       <div class='cssmenu'>
           <ul>
-             <li class='has-sub'><a href="#"><span>Каталог</span></a>
+             <li class='has-sub'><a href="#"><span>Catalog</span></a>
                 <ul>
                  @foreach( $catalog as $item )
                   <li class='has-sub'><a href="#"><img class="catalogimg" src="@if(!is_null($item->img_catalog_url)){{$item->img_catalog_url}}@else /img/categories/kitchen-utensils.png

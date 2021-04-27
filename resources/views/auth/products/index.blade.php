@@ -4,13 +4,13 @@
 <link rel="stylesheet" href="/css/auth/prodindex.css">
 @endsection
 
-@section('title-admin', 'Продукты')
+@section('title-admin', 'Products')
 
 @section('content-admin')
 <div class="container emp-profile">
   <div class="col-md-12">
     @include('inc.flash')
-       <h1>Товары</h1>
+       <h1>Products</h1>
        <table class="table table-bordered">
            <tbody>
            <tr>
@@ -18,16 +18,16 @@
                    #
                </th>
                <th class="text-center">
-                   Название
+                   Name
                </th>
                <th class="text-center">
-                   Категория
+                   Category
                </th>
                <th class="text-center">
-                   Статус
+                   Status
                </th>
                <th class="text-center">
-                   Действия
+                   Actions
                </th>
            </tr>
              @foreach($products as $product)
@@ -40,15 +40,15 @@
                        <div class="btn-group" role="group">
                            <form method="POST">
                                <a class="btn btn-success" type="button"
-                                  href="/{{ $product->category->code }}/{{ $product->category->url }}/{{ $product->url }}">Открыть</a>
+                                  href="/{{ $product->category->code }}/{{ $product->category->url }}/{{ $product->url }}">Open</a>
                                <a class="btn btn-warning" type="button"
-                                  href="{{ route('products.edit', $product)}}">Редактировать</a>
+                                  href="{{ route('products.edit', $product)}}">Edit</a>
                                @csrf
                            </form>
                            <form class="ml-1" action="{{ route('products.destroy', $product)}}" method="POST">
                              @method('DELETE')
                              @csrf
-                             <input class="btn btn-danger" type="submit" value="Удалить">
+                             <input class="btn btn-danger" type="submit" value="Delete">
                            </form>
                        </div>
                    </td>
@@ -56,7 +56,7 @@
                @endforeach
            </tbody>
        </table>
-       <a class="btn btn-success" type="button" href="{{ route('products.create') }}">Добавить товар</a>
+       <a class="btn btn-success" type="button" href="{{ route('products.create') }}">Add product</a>
    </div>
 </div>
 @endsection

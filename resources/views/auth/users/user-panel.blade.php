@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/auth/user-panel.css">
 @endsection
 
-@section('title-admin', 'Личный кабинет')
+@section('title-admin', 'Personal area')
 
 @section('content-admin')
 <div class="container emp-profile">
@@ -16,10 +16,10 @@
                         <div class="profile-head">
                             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Информация</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Info</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Мои заказы</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">My orders</a>
                                 </li>
                             </ul>
                         </div>
@@ -39,26 +39,26 @@
                                         <tbody>
                                           @csrf
                                             <tr>
-                                              <th scope="col">Имя</th>
+                                              <th scope="col">Name</th>
                                               <td class="userdata">{{ Auth::user()->name }}</td>
-                                              <td class="useredit"><input name="name" placeholder="Введите новое имя"><td>
+                                              <td class="useredit"><input name="name" placeholder="Enter your new name"><td>
                                               <td><a href="#"><i class="fas fa-edit"></i><i class="fas fa-times"></i></a><td>
                                             </tr>
                                             <tr>
                                               <th scope="col">E-Mail</th>
                                               <td class="userdata">{{ Auth::user()->email }}</td>
-                                              <td class="useredit"><input onClick="setPos();" name="email" placeholder="Введите новый Email"><td>
+                                              <td class="useredit"><input onClick="setPos();" name="email" placeholder="Enter your new Email"><td>
                                               <td><a href="#"><i class="fas fa-edit"></i><i class="fas fa-times"></i></a><td>
                                             </tr>
                                             <tr>
-                                              <th scope="col">Tel.</th>
+                                              <th scope="col">Phone</th>
                                               <td class="userdata">{{ Auth::user()->Format_Number_User }}</td>
-                                              <td class="useredit"><input name="phone" placeholder="Введите новый номер"><td>
+                                              <td class="useredit"><input name="phone" placeholder="Enter your new Phone"><td>
                                               <td><a href="#"><i class="fas fa-edit"></i><i class="fas fa-times"></i></a><td>
                                             </tr>
                                             <tr>
                                               <th></th>
-                                              <td><input class="usereditbtn btn btn-success" type="submit" value="Сохранить"></td>
+                                              <td><input class="usereditbtn btn btn-success" type="submit" value="Save"></td>
                                               <td></td>
                                               <td></td>
                                               <td></td>
@@ -76,9 +76,9 @@
                                       @foreach($orders as $order)
                                       <thead>
                                         <tr>
-                                          <th scope="col">Название</th>
-                                          <th scope="col" class="text-center">Кол-во <span class="prodcount">{{ $order->cart->totalQty }}</span></th>
-                                          <th scope="col" class="text-right">Стоимость</th>
+                                          <th scope="col">Name</th>
+                                          <th scope="col" class="text-center">Qty <span class="prodcount">{{ $order->cart->totalQty }}</span></th>
+                                          <th scope="col" class="text-right">Cost</th>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -90,7 +90,7 @@
                                         </tr>
                                           @endforeach
                                         <tr>
-                                          <th scope="row"><h5>Общая стоимость:</h5></th>
+                                          <th scope="row"><h5>Total cost:</h5></th>
                                           <td></td>
                                           <td class="text-right"><h5>{{ $order->cart->totalPrice }} AZN</h5></td>
                                       </tr>

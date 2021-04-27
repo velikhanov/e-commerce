@@ -9,7 +9,7 @@
             <form action="{{ route('user_edit') }}" class="user_edit_form" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="file btn btn-lg btn-primary">
-                  <label for="userimg" class="changeimg">Сменить</span>
+                  <label for="userimg" class="changeimg">Change</span>
                   <input type="file" id="userimg" name="userimg">
               </div>
           </form>
@@ -30,25 +30,25 @@
         <li class="nav-item">
           <a href="{{ route('index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
                     <i class="fa fa-th-large mr-1 text-primary fa-fw"></i>
-                    Главная
+                    Main
                 </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('paydel') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
                     <i class="fa fa-address-card mr-1 text-primary fa-fw"></i>
-                    Оплата и доставка
+                    Payment and delivery
                 </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('contacts') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
                     <i class="fa fa-cubes mr-1 text-primary fa-fw"></i>
-                    Контакты
+                    Contacts
                 </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('aboutus') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
                     <i class="fa fa-picture-o mr-1 text-primary fa-fw"></i>
-                    О нас
+                    About us
                 </a>
         </li>
       </ul>
@@ -59,33 +59,33 @@
         <li class="nav-item">
           <a href="{{ route('user_panel') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('user-panel') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-area-chart mr-1 text-primary fa-fw"></i>
-                    Личный кабинет
+                    Personal area
                 </a>
         </li>
         @if(Auth::user()->role)
         <li class="nav-item">
           <a href="{{ route('admin_order') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/admin-order') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-bar-chart mr-1 text-primary fa-fw"></i>
-                    Заказы
+                    Orders
                 </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('categories.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/categories') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-pie-chart mr-1 text-primary fa-fw"></i>
-                    Категории
+                    Categories
                 </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('products.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/products') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-line-chart mr-1 text-primary fa-fw"></i>
-                    Товары
+                    Products
                 </a>
         </li>
         @endif
         <li class="nav-item">
           <a id="logout-link" href="#" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
               <i class="fa fa-area-chart mr-1 text-primary fa-fw"></i>
-              Выйти
+              Log out
           </a>
           <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
               @csrf

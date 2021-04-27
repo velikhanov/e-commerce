@@ -10,7 +10,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" class="close-modal">&times;</span>
               </button>
-                  <h2 class="text-center">Оформление заказа</h2>
+                  <h2 class="text-center">Checkout</h2>
                   <table class="table">
                     <tbody>
                       <tr>
@@ -26,7 +26,7 @@
                         </td>
                       </tr>
                       <tr>
-                        <td colspan="3"><h5>Общая стоимость:</h5></td>
+                        <td colspan="3"><h5>Total cost:</h5></td>
                         <td class="d-flex"><h5 class="totalPrice"></h5><h5>AZN</h5></td>
                     </tr>
                     </tbody>
@@ -62,7 +62,7 @@
 
                  </div>
                  <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block submitModal" value="Оформить заказ">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block submitModal" value="Place order">
                  </div>
             </form>
         </div>

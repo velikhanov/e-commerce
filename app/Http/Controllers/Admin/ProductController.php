@@ -77,7 +77,7 @@ class ProductController extends Controller
           //   $dataimg['created_at'] = Carbon::now();
           //   ProductImage::create($dataimg);
           // };
-        return redirect()->route('products.index')->with('success', 'Продукт '.$product->name.' добавлен успешно!');
+        return redirect()->route('products.index')->with('success', 'Product '.$product->name.' added successfully!');
     }
 
     /**
@@ -171,7 +171,7 @@ class ProductController extends Controller
             ProductImage::create($dataimg);
           };
         };
-        return redirect()->route('products.edit', ['product' => $product->id])->with('success', 'Данные продукта '.$product->name.' успешно обновлены!');
+        return redirect()->route('products.edit', ['product' => $product->id])->with('success', 'Product data '.$product->name.' has been successfully updated!!');
     }
 
     /**
@@ -198,6 +198,6 @@ class ProductController extends Controller
       }
         $product->delete();
 
-        return redirect()->route('products.index')->with('danger', 'Продукт '.$product->name.' успешно удален!');
+        return redirect()->route('products.index')->with('danger', 'Product '.$product->name.' successfully deleted!');
     }
 }

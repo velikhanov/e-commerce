@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/main/slick-theme.css">
 @endsection
 
-@section('title', 'Главная страница')
+@section('title', 'Home page')
 
 @section('content')
 <section class="section">
@@ -52,7 +52,7 @@
   </div>
 </section>
 <section class="container">
-    <h1 class="s2tittle">Лидеры продаж</h1>
+    <h1 class="s2tittle">Sales leaders</h1>
       <div class="slider">
         @foreach($proditem as $product)
           @foreach($product->products as $item)
@@ -67,14 +67,14 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i></span>
-                <span class="card-text feedback">10 отзывов</span>
+                <span class="card-text feedback">10 reviews</span>
                 </div>
               </div><!--end card-body-->
               <div class="card-footer"></div>
-              <div class="text-center"><i class="fa fa-handshake"></i><span class="reg">Оформило 10 человек</span><br>
+              <div class="text-center"><i class="fa fa-handshake"></i><span class="reg">Issued by 10 people</span><br>
               <div class="product-icon-container">
-                <a href="{{ route('basket-add', [ 'id' => $item->id ]) }}" class="ajaxcartadd scrollOffset btn btn-success mt-2 mb-1">В корзину</a>
-                <a href="{{ route('modal_order', [ 'id' => $item->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1" data-id="">Купить</a>
+                <a href="{{ route('basket-add', [ 'id' => $item->id ]) }}" class="ajaxcartadd scrollOffset btn btn-success mt-2 mb-1">Add to cart</a>
+                <a href="{{ route('modal_order', [ 'id' => $item->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1" data-id="">Buy now</a>
                 <!-- <a href="{{ route('modal_order', [ 'id' => $item->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1" data-id="{{ $item->id }}" type="button" data-toggle="modal" data-target="#staticBackdrop">Купить</a> -->
               </div>
               </div>

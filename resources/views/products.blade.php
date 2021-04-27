@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/main/jquery.fancybox.min.css">
 @endsection
 
-@section('title', 'Товары')
+@section('title', 'Products')
 
 @section('content')
 <section class="section">
@@ -50,21 +50,21 @@
                     <a href="{{ route('basket-inc', [ 'id' => $prod['id'] ]) }}" class="fas fa-plus-square"></a>
                 </div>-->
                 <div class="product-icon-container baskbuy">
-                  <a href="{{ route('basket-add', [ 'id' => $prod->id ]) }}" class="ajaxcartadd btn btn-success mt-2 mb-1">В корзину</a>
-                  <a href="{{ route('modal_order', [ 'id' => $prod->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1">Купить</a>
+                  <a href="{{ route('basket-add', [ 'id' => $prod->id ]) }}" class="ajaxcartadd btn btn-success mt-2 mb-1">Add to cart</a>
+                  <a href="{{ route('modal_order', [ 'id' => $prod->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1">Buy now</a>
                 </div>
               </div>
           </div><!--end col-->
       </div><!--end row-->
       <div class="row mt-5">
           <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_1" aria-expanded="true" aria-controls="collapseExample_1">
-          Характеристики
+          properties
           </button>
           <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_2" aria-expanded="false" aria-controls="collapseExample_2">
-            Описание
+            Description
           </button>
           <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_3" aria-expanded="false" aria-controls="collapseExample_3">
-            Отзывы
+            Reviews
           </button>
       </div>
       <div id="collapse_card_group" class="borderprop">
@@ -90,11 +90,11 @@
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i></span>
               </div>
-                  <span class="col-lg-3 col-md-3 col-sm-6 text-lg-left text-sm-right">Валерий Иванович</span>
-                  <span class="col-lg-5 col-md-5 col-sm-12 text-lg-left text-sm-center">Крутой холодильник, круто холодит.Крутой холодильник, круто холодит.Крутой холодильник, круто холодит.Крутой холодильник, круто холодит.Крутой холодильник, круто холодит.Крутой холодильник, круто холодит.Крутой холодильник, круто холодит.</span>
+                  <span class="col-lg-3 col-md-3 col-sm-6 text-lg-left text-sm-right">Name Name</span>
+                  <span class="col-lg-5 col-md-5 col-sm-12 text-lg-left text-sm-center">Test comment</span>
                   <span class="col-lg-2 col-md-2 col-sm-12 text-center">27.04.2020</span>
             </div>
-            <button href="#" class="btn btn-primary mt-3" type="button">Оставить отзыв</button>
+            <button href="#" class="btn btn-primary mt-3" type="button"Give feedback</button>
           </div>
         </div><!--end collapsed properties-->
         @endforeach

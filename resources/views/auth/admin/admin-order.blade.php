@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/auth/admin-order.css">
 @endsection
 
-@section('title-admin', 'Все заказы')
+@section('title-admin', 'Orders')
 
 @section('content-admin')
 <div class="container emp-profile">
@@ -14,9 +14,9 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">Название</th>
-              <th scope="col" class="text-center">Кол-во <span class="prodcount">{{ $order->cart->totalQty }}</span></th>
-              <th scope="col" class="text-right">Стоимость </th>
+              <th scope="col">Name</th>
+              <th scope="col" class="text-center">Qty <span class="prodcount">{{ $order->cart->totalQty }}</span></th>
+              <th scope="col" class="text-right">Cost </th>
             </tr>
           </thead>
           <tbody>
@@ -28,12 +28,12 @@
             </tr>
           @endforeach
             <tr>
-              <th scope="col"><h5>Пользователь</h5></th>
+              <th scope="col"><h5>User</h5></th>
               <td class="text-center"><h5>{{ $order->name }}<br>{{ $order->email }}<br>{{ $order->Format_Number_Order }}</h5></td>
-              <td class="text-right"><h5>{{ $order->address ?? 'Нет адреса'}}</h5></td>
+              <td class="text-right"><h5>{{ $order->address ?? 'No address'}}</h5></td>
             </tr>
             <tr>
-              <th scope="row"><h5>Общая стоимость:</h5></th>
+              <th scope="row"><h5>Total cost:</h5></th>
               <td></td>
               <td class="text-right"><h5>{{ $order->cart->totalPrice }} AZN</h5></td>
           </tr>

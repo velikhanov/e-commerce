@@ -4,24 +4,24 @@
   <link rel="stylesheet" href="/css/main/basket.css">
 @endsection
 
-@section('title', 'Корзина')
+@section('title', 'Cart')
 
 @section('content')
 <section class="section">
   <div class="container">
   @if(Session::has('cart'))
-  <h2 class="text-center">Корзина</h1>
-  <h6 class="text-center mb-3">Оформление заказа</h3>
+  <h2 class="text-center">Cart</h1>
+  <h6 class="text-center mb-3">Checkout</h3>
   @include('inc.flash')
     <div class="row">
         <div class="col-12">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Название</th>
-                <th scope="col">Кол-во</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Стоимость</th>
+                <th scope="col">Name</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+                <th scope="col">Cost</th>
               </tr>
             </thead>
             <tbody>
@@ -41,16 +41,16 @@
               </tr>
                 @endforeach
               <tr>
-                <td colspan="3"><h5>Общая стоимость:</h5></td>
+                <td colspan="3"><h5>Total cost:</h5></td>
                 <td><h5>{{ $totalPrice ?? '0'}} AZN</h5></td>
             </tr>
             </tbody>
           </table>
         </div>
-        <a href="{{ route('basket-clr', [ 'id' => $product['id'] ]) }}" class="btn btn-danger clearcart">Очистить корзину</a>
+        <a href="{{ route('basket-clr', [ 'id' => $product['id'] ]) }}" class="btn btn-danger clearcart">Clear cart</a>
     </div>
     <div class="row">
-      <a href="{{ route('new_order') }}" class="btn btn-success">Оформить заказ</a>
+      <a href="{{ route('new_order') }}" class="btn btn-success">Place order</a>
     </div>
   @else
       <!-- FLash -->
@@ -58,17 +58,17 @@
       <!-- flash -->
     <div class="row mb-5 text-center">
         <div class="col-lg-12">
-            <h1><strong>Ваша корзина пуста</strong></h1>
+            <h1><strong>Your cart is empty</strong></h1>
         </div>
         <div class="col-lg-12">
-            <a class="btn btn-primary mt-1 mb-1 mr-1" href="{{ route('index') }}">На главную</a><a class="btn btn-primary mt-1 mb-1 ml-1" href="/categories">Категории товаров</a>
+            <a class="btn btn-primary mt-1 mb-1 mr-1" href="{{ route('index') }}">To the main</a><a class="btn btn-primary mt-1 mb-1 ml-1" href="/categories">Catalog</a>
         </div>
         <div class="col-lg-12">
           <img class="img-fluid" src="/img/basket/truck.png">
         </div>
     </div>
 @endif
-    <h6 class="alert alert-warning mt-3">Уважаемые пользователи, обратите внимание: Если вы не авторизованы на сайте, то товары в корзине будут храниться несколько часов, если же Вы не хотите чтобы товары из корзины исчезли, пройдите регистрацию. Будьте уверены, что вы авторизованы перед добавлением товаров в козину.</h6>
+    <!-- <h6 class="alert alert-warning mt-3">Уважаемые пользователи, обратите внимание: Если вы не авторизованы на сайте, то товары в корзине будут храниться несколько часов, если же Вы не хотите чтобы товары из корзины исчезли, пройдите регистрацию. Будьте уверены, что вы авторизованы перед добавлением товаров в козину.</h6> -->
   </div>
 </section>
 @endsection
