@@ -22,6 +22,19 @@ class BasketController extends Controller
     }
     $oldCart = Session::get('cart');
     $cart = new Cart($oldCart);
+    // $product = Product::get();
+    //   foreach($product as $prod){
+    //    $prodimg = null; //define it here as null
+    //     if(isset($prod->cardImage->path)){
+    //       $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+    //       $file = $contents
+    //       ->where('type', '=', 'file')
+    //       ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
+    //       ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
+    //       ->first();
+    //        $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+    //     };
+    //   };
 
     return view('basket', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
   }
@@ -141,6 +154,16 @@ class BasketController extends Controller
   public function modal_order_place(Request $request){
 
     $product = Product::find($request->id);
+      $prodimg = null; //define it here as null
+       if(isset($product->cardImage->path)){
+         $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
+         $file = $contents
+         ->where('type', '=', 'file')
+         ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
+         ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
+         ->first();
+          $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
+       };
     $selprod['items'] = array(
       $request->id => array(
           'name' => $product->name,
@@ -149,7 +172,7 @@ class BasketController extends Controller
           'prod_url' => $product->url,
           'code_cat' => $product->category->code,
           'url_cat' => $product->category->url,
-          'img' => $product->cardImage?(Storage::disk('public')->exists('products/'.$product->id.'/'.$product->cardImage->path)?Storage::url('products/'.$product->id.'/'.$product->cardImage->path):'/img/products/no-img.png'):'/img/products/no-img.png',
+          'img' => $product->cardImage?($prodimg):('/img/products/no-img.png'),
           'cost' => $product->price*$request->qty
         )
       );
