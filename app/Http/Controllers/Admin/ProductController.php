@@ -108,7 +108,7 @@ class ProductController extends Controller
           ->where('extension', '=', pathinfo($product->category->img, PATHINFO_EXTENSION))
           ->first();
         };
-        $prevprodimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
+        $prevprodimg = isset($product->category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
         return view('auth.products.form', compact('product' ,'categories', 'prevprodimg'));
     }
 
