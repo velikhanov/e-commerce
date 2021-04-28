@@ -4,7 +4,7 @@
       <div class="py-4 px-3 mb-1">
         <div class="media d-flex align-items-center">
           <div class="profile-img">
-            <!-- <a href="{{ ((Auth::user()->img) && (Storage::disk('public')->exists('users/'.Auth::user()->img))) ? (Storage::url('users/'.Auth::user()->img)) : '/img/svg/laptop-house-solid.svg' }}" data-fancybox="gallery-1"><img src="{{ ((Auth::user()->img) && (Storage::disk('public')->exists('users/'.Auth::user()->img))) ? (Storage::url('users/'.Auth::user()->img)) : '/img/svg/laptop-house-solid.svg' }}" class="rounded-circle img-thumbnail shadow-sm"></a> -->
+            <!-- <a href="{{ ((Auth::user()->img) && ($userimg)) ? ($userimg) : '/img/svg/laptop-house-solid.svg' }}" class="rounded-circle img-thumbnail shadow-sm"></a> -->
             <a href="{{ ((Auth::user()->img) && ($userimg)) ? ($userimg) : '/img/svg/laptop-house-solid.svg' }}" data-fancybox="gallery-1"><img src="{{ ((Auth::user()->img) && ($userimg)) ? ($userimg) : '/img/svg/laptop-house-solid.svg' }}" class="rounded-circle img-thumbnail shadow-sm"></a>
             <form action="{{ route('user_edit') }}" class="user_edit_form" method="POST" enctype="multipart/form-data">
               @csrf
