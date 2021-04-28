@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\UrlGenerator;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+	resolve(UrlGenerator::class)->forceScheme('https');
+        parent::boot();
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
