@@ -100,7 +100,7 @@
           <ul>
             <li>
               <h3>Delivery addresses</h3>
-              <p>Delivery of goods purchased in our store is carried out daily - up to 100 km from the Moscow Ring Road of the center of Baku, etc.</p>
+              <p>Delivery of goods purchased in our store is carried out daily - up to 100 km from the Baku Ring Road of the center of Baku, etc.</p>
             </li>
             <li>
               <h3>Delivery rates</h3>
