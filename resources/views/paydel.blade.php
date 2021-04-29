@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <div class="delboxes">
-                  <h3 class="ml-3">Доставка</h3>
+                  <h3 class="ml-3">Delivery</h3>
                   <h6 class="ml-3">at a certain period of time</h6>
                     <div class="bgbox">
                       <div class="bgboxtext_1"><b>+50%</b> to the shipping cost</div>
