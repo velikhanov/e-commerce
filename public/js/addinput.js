@@ -22,9 +22,16 @@ $("#addRow").click(function () {
 // remove row
 $(document).on('click', '#removeRow', function () {
     $(this).closest('#inputFormRow').remove();
-    for (var i = 0; i< $('input[name=properties]').length; i++){
-      $('input[name=properties]').attr('name', 'properties['+i+'][key]');
-      $('input[name=properties]').attr('name', 'properties['+i+'][value]');
+//     for (var i = 0; i< $('input[name=properties]').length; i++){
+//       $('input[name=properties]').attr('name', 'properties['+i+'][key]');
+//       $('input[name=properties]').attr('name', 'properties['+i+'][value]');
+//
+// });
+    var i = 0;
+    $(".input-group").each(function(i) {
+      i++;
+    $(this).find('input').attr('name', 'properties['+i+'][key]');
+    $(this).find('input').attr('name', 'properties['+i+'][value]');
     };
 });
     //
