@@ -32,6 +32,6 @@ $(document).on('click', '#removeRow', function () {
       i++;
     $(this).find('input').attr('name', 'properties['+i+'][key]');
     $(this).find('input').attr('name', 'properties['+i+'][value]');
-    };
+  });
 });
     //
