@@ -4,6 +4,12 @@ if($('#icount').length){
 }else{
   i = 0;
 };
+// remove row
+$(document).on('click', '#removeRow', function () {
+    $(this).closest('#inputFormRow').remove();
+    i--;
+});
+//
 $("#addRow").click(function () {
         var html = '';
         html += '<div id="inputFormRow">';
@@ -19,10 +25,3 @@ $("#addRow").click(function () {
 
         $('#newRow').append(html);
     });
-
-  // remove row
-  $(document).on('click', '#removeRow', function () {
-      $(this).closest('#inputFormRow').remove();
-      i--;
-  });
-  //
