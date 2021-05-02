@@ -11,5 +11,8 @@ function readURL(input) {
 }
 
 $("input[type=file]").change(function() {
+  if ($('.preview img').css('display') == 'none'){
+   $('.preview img').css('display', 'inline');
+ };
   readURL(this);
 });

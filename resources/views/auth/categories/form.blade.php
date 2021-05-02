@@ -89,9 +89,13 @@
                             Upload <input type="file" style="display: none;" name="catimg" id="catimg">
                         </label>
                         <div class="preview d-inline">
-                        @if(!is_null($category->img && $prevcatimg))
-                          <img src="{{$prevcatimg ?? NULL}}" alt="Preview images">
-                        @endif
+                        @isset($category)
+                          @if(!is_null($category->img && $prevcatimg))
+                            <img src="{{$prevcatimg ?? NULL}}" alt="Preview images">
+                          @endif
+                        @else
+                            <img style="display: none;" src="" alt="Preview images">
+                        @endisset
                         </div>
                     </div>
                 </div>
