@@ -1,7 +1,7 @@
 @extends('auth.layouts.app')
 
 @section('admin-css')
-<link rel="stylesheet" href="/css/auth/prodform.css">
+<link rel="stylesheet" href="/css/auth/catform.css">
 @endsection
 
 @isset($category)

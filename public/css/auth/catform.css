@@ -1,0 +1,8 @@
+.preview img{
+  width: auto;
+  height: 75px;
+  transition: .5s;
+}
+.main-block input:focus{
+  outline: 0;
+}
