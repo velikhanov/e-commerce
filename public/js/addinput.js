@@ -23,5 +23,6 @@ $("#addRow").click(function () {
   // remove row
   $(document).on('click', '#removeRow', function () {
       $(this).closest('#inputFormRow').remove();
+      i--;
   });
   //
