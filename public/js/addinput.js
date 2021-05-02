@@ -4,12 +4,6 @@ if($('#icount').length){
 }else{
   i = 0;
 };
-// remove row
-$(document).on('click', '#removeRow', function () {
-    $(this).closest('#inputFormRow').remove();
-    i--;
-});
-//
 $("#addRow").click(function () {
         var html = '';
         html += '<div id="inputFormRow">';
@@ -25,3 +19,11 @@ $("#addRow").click(function () {
 
         $('#newRow').append(html);
     });
+// remove row
+$(document).on('click', '#removeRow', function () {
+    $(this).closest('#inputFormRow').remove();
+    for (var i = 0; i< $('input[name=properties]').rows.length; i++){
+      $('input[name=properties]').rows[i].cells[0].html(i);
+    }
+});
+    //
