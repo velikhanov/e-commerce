@@ -114,8 +114,8 @@
                             @for ($i=0; $i < (!is_null($product->properties)?count($product->properties):'0'); $i++)
                             <div id="inputFormRow">
                                 <div class="input-group mb-3">
-                                      <input type="text" name="properties[{{ $i }}][key]" value="{{ $product->properties[$i]['key'] ?? '' }}" class="form-control m-input ml-3" placeholder="Key" autocomplete="off">
-                                      <input type="text" name="properties[{{ $i }}][value]" value="{{ $product->properties[$i]['value'] ?? '' }}" class="form-control m-input ml-3" placeholder="Value" autocomplete="off">
+                                      <input type="text" name="properties[{{ $i }}][key]" value="{{ $product->properties[$i]['key'] ?? '' }}" class="key form-control m-input ml-3" placeholder="Key" autocomplete="off">
+                                      <input type="text" name="properties[{{ $i }}][value]" value="{{ $product->properties[$i]['value'] ?? '' }}" class="value form-control m-input ml-3" placeholder="Value" autocomplete="off">
                                   <div class="input-group-append ml-3">
                                       <button id="removeRow" type="button" class="btn btn-danger">Delete</button>
                                   </div>
