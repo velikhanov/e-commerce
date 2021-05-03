@@ -23,7 +23,7 @@ $("#addRow").click(function () {
 $(document).on('click', '#removeRow', function () {
     i--;
     $(this).closest('#inputFormRow').remove();
-    for (i; i< $('input[name=properties]').length/2; i++){
+    for (i; i< $('.key').length; i++){
       $('.key').attr('name', 'properties['+i+'][key]');
       $('.value').attr('name', 'properties['+i+'][value]');
 
