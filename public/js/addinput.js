@@ -22,19 +22,10 @@ $("#addRow").click(function () {
 // remove row
 $(document).on('click', '#removeRow', function () {
     $(this).closest('#inputFormRow').remove();
-//     for (var i = 0; i< $('input[name=properties]').length; i++){
-//       $('input[name=properties]').attr('name', 'properties['+i+'][key]');
-//       $('input[name=properties]').attr('name', 'properties['+i+'][value]');
-//
-// });
-    var j = 0, i = 0;
-    $(".key").each(function(i) {
-      i++;
-    $(this).attr('name', 'properties['+i+'][key]');
-  });
-    $(".value").each(function(j) {
-      j++;
-    $(this).attr('name', 'properties['+j+'][key]');
-  });
+    for (var i = 0; i< $('.key').length; i++){
+      $('.key').attr('name', 'properties['+i+'][key]');
+      $('.value').attr('name', 'properties['+i+'][value]');
+
+});
 });
     //
