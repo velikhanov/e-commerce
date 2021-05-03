@@ -21,8 +21,9 @@ $("#addRow").click(function () {
     });
 // remove row
 $(document).on('click', '#removeRow', function () {
+    i--;
     $(this).closest('#inputFormRow').remove();
-    for (var i = 0; i< $('input.key').length; i++){
+    for (i; i< $('input.key').length; i++){
       $('.key').attr('name', 'properties['+i+'][key]');
       $('.value').attr('name', 'properties['+i+'][value]');
 
