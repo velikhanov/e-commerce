@@ -26,6 +26,6 @@ $(document).on('click', '#removeRow', function () {
       $('.key').attr('name', 'properties['+i+'][key]');
       $('.value').attr('name', 'properties['+i+'][value]');
 
-});
+    };
 });
     //
