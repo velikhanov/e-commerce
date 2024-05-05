@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'google'),
+    'default' => env('FILESYSTEM_DRIVER', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ return [
     */
 
     // 'cloud' => env('FILESYSTEM_CLOUD', 's3'),
-    'cloud' => 'google',
+    // 'cloud' => 'google',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,13 +56,13 @@ return [
             'visibility' => 'public',
         ],
             // ...
-        'google' => [
-            'driver' => 'google',
-            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
-            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
-            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
-            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
-        ],
+        // 'google' => [
+        //     'driver' => 'google',
+        //     'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+        //     'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+        //     'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+        //     'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
+        // ],
         // ...
 
         's3' => [

@@ -17,7 +17,7 @@
             <h5><em class="font-italic num">+(994)12-342-71-32</em></h5>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12">
-            <h3><strong>Режим работы:</strong></h3>
+            <h3><strong>Working mode:</strong></h3>
             <p>Orders by phone are accepted:
                 Monday - Friday: from 10:00 to 19:00,
                 Saturday, Sunday: closed.

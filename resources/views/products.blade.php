@@ -20,7 +20,7 @@
               <div class="productslider__big">
               @if($prod->productImage->isNotEmpty())
                 @foreach($prod->productImage as $imgitem)
-                <a href="{{$imgitem->img_prod_url ?? NULL}}" data-fancybox="gallery-1"><img class="prodimgbig" src="{{$imgitem->img_prod_url ?? '/img/products/no-img.png'}}"></a>
+                <a href="{{Storage::url('products/'.$prod->id)}}/{{ $imgitem->path}}" data-fancybox="gallery-1"><img class="prodimgbig" src="{{Storage::url('products/'.$prod->id)}}/{{ $imgitem->path}}"></a>
                 @endforeach
               @else
               <a href="/img/products/no-img.png" data-fancybox="gallery-1"><img class="prodimgbig" src="/img/products/no-img.png"></a>
@@ -29,7 +29,7 @@
               <div class="productslider__small">
               @if($prod->productImage->isNotEmpty())
                 @foreach($prod->productImage as $imgitem)
-                <div><img class="prodimgsmall" src="{{$imgitem->img_prod_url ?? '/img/products/no-img.png'}}"></div>
+                <div><img class="prodimgsmall" src="{{Storage::url('products/'.$prod->id)}}/{{ $imgitem->path}}"></div>
                 @endforeach
               @endif
               </div>
@@ -38,10 +38,17 @@
             <div class="card">
               <!-- <input class="prodlink" type="hidden" href="/{{Request::path()}}">
               <input class="card-img-top" type="hidden" src="/img/products/{{ $prod->cardImage->path ?? 'no-img.png'}}"> -->
-              <div class="card-body text-center">
+              <div class="card-body text-center pb-0">
                 <span class="card-title border-bottom">{{ $prod->name }}</span>
-                <div class="prch mt-5 border-bottom"><span class="card-text">{{ $prod->price }} AZN</span><a class="compareicon" href="#"><i href="#" class="fas fa-balance-scale"></a></i></div><br>
-                <span class="card-text"><i class="{{ $prod->is_available_icon }} mt-5"></i>{{ $prod->is_available_text }}</span>
+                <div class="text-left border-bottom mt-5"><strong class="card-text">Reference:</strong> {{ $prod->url }}</div>
+                <!-- <div class="prch mt-5 border-bottom"><span class="card-text">{{ $prod->price }} AZN</span> -->
+                <div class="mt-5 border-bottom text-left"><strong class="card-text">Price:</strong> {{ $prod->price }} AZN
+                <!-- <a class="compareicon" href="#"><i href="#" class="fas fa-balance-scale"></a></i> -->
+              </div>
+              <br>
+                <div class="card-text text-left">
+                  <i class="{{ $prod->is_available_icon }} mt-5"></i>{{ $prod->is_available_text }}
+                </div>
               </div><!--end card-body-->
               <div class="card-footer"></div>
               <!--  <div class="btn-group form-inline">
@@ -51,37 +58,50 @@
                 </div>-->
                 <div class="product-icon-container baskbuy">
                   <a href="{{ route('basket-add', [ 'id' => $prod->id ]) }}" class="ajaxcartadd btn btn-success mt-2 mb-1">Add to cart</a>
-                  <a href="{{ route('modal_order', [ 'id' => $prod->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1">Buy now</a>
+                  <a href="{{ route('modal_order', [ 'id' => $prod->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1">Buy</a>
                 </div>
               </div>
           </div><!--end col-->
       </div><!--end row-->
       <div class="row mt-5">
           <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_1" aria-expanded="true" aria-controls="collapseExample_1">
-          properties
+            Properties
           </button>
           <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_2" aria-expanded="false" aria-controls="collapseExample_2">
             Description
           </button>
-          <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_3" aria-expanded="false" aria-controls="collapseExample_3">
+          <!-- <button class="btn pay col-lg-3 col-md-6 col-sm-12" type="button" data-toggle="collapse" data-target="#collapseExample_3" aria-expanded="false" aria-controls="collapseExample_3">
             Reviews
-          </button>
+          </button> -->
       </div>
       <div id="collapse_card_group" class="borderprop">
           <div class="collapse show" id="collapseExample_1" data-parent="#collapse_card_group">
+            @if(!empty($prod->properties))
             <table class="table table-bordered">
-              @for ($i=0; $i < (!is_null($prod->properties)?count($prod->properties):'0'); $i++)
-                <tr>
-                  <th scope="row">{{$prod->properties[$i]['key'] ?? ''}}:</th>
-                  <td>{{ $prod->properties[$i]['value'] ?? ''}}</td>
-                </tr>
-              @endfor
+                @for ($i=0; $i < (count($prod->properties)); $i++)
+                  <tr>
+                    <th scope="row">{{$prod->properties[$i]['key'] ?? ''}}:</th>
+                    <td>{{ $prod->properties[$i]['value'] ?? ''}}</td>
+                  </tr>
+                @endfor
             </table>
+            @else
+              <!-- <tr>
+                <th scope="row">This product has no properties</th>
+              </tr> -->
+              <center><strong class="text-secondary">This product has no properties</strong></center>
+            @endif
           </div>
           <div class="collapse" id="collapseExample_2" data-parent="#collapse_card_group">
-            <h3 class="border text-success pl-1">{{ $prod->description }}</h3>
+            @if(!empty($prod->description))
+              <h3 class="border text-success pl-1">{{ $prod->description }}</h3>
+            @else
+              <center>
+                  <strong class="text-secondary">This product has no description</strong>
+              </center>
+            @endif
           </div>
-          <div class="collapse text-center" id="collapseExample_3" data-parent="#collapse_card_group">
+          <!-- <div class="collapse text-center" id="collapseExample_3" data-parent="#collapse_card_group">
             <div class="row jumbotron">
               <div class="col-lg-2 col-md-2 col-sm-6 text-left">
                   <span><i class="fa fa-star"></i>
@@ -90,12 +110,12 @@
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i></span>
               </div>
-                  <span class="col-lg-3 col-md-3 col-sm-6 text-lg-left text-sm-right">Name Name</span>
-                  <span class="col-lg-5 col-md-5 col-sm-12 text-lg-left text-sm-center">Test comment</span>
+                  <span class="col-lg-3 col-md-3 col-sm-6 text-lg-left text-sm-right">Mark</span>
+                  <span class="col-lg-5 col-md-5 col-sm-12 text-lg-left text-sm-center">Cool refrigeratoe!</span>
                   <span class="col-lg-2 col-md-2 col-sm-12 text-center">27.04.2020</span>
             </div>
-            <button href="#" class="btn btn-primary mt-3" type="button"Give feedback</button>
-          </div>
+            <button href="#" class="btn btn-primary mt-3" type="button">Leave a review</button>
+          </div> -->
         </div><!--end collapsed properties-->
         @endforeach
   </div><!--end container-->

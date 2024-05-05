@@ -43,10 +43,10 @@ class Product extends Model
   }
   public function getIsAvailableTextAttribute()
   {
-      return $this->status === true ? 'In stock' : 'Not available';
+      return $this->status == 1 ? 'In stock' : 'Out of stock';
   }
   public function getIsAvailableIconAttribute()
   {
-      return $this->status === true ? 'fas fa-check' : 'fas fa-times';
+      return $this->status == 1 ? 'fas fa-check' : 'fas fa-times';
   }
 }

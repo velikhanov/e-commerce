@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sing up')
+@section('title-admin', 'Регистрация')
 
 @section('content')
 <section class="auth-bg">
@@ -23,7 +23,7 @@
 
           </div>
     		   <div class="form-group">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  value="{{ old('email') }}" placeholder="E-Mail Address" required autocomplete="email">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" required autocomplete="email">
 
                 @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
 
            </div>
            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
            </div>
       </form>
       <h6 class="text-center">Already have an account? <a href="{{ route('login') }}">Login here!</a></h6>

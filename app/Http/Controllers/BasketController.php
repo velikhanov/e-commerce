@@ -22,6 +22,7 @@ class BasketController extends Controller
     }
     $oldCart = Session::get('cart');
     $cart = new Cart($oldCart);
+
     return view('basket', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
   }
 
@@ -94,6 +95,7 @@ class BasketController extends Controller
 
     $oldCart = Session::get('cart');
     $cart = new Cart($oldCart);
+
     return view('order', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
   }
 
@@ -113,25 +115,15 @@ class BasketController extends Controller
 
     Auth::check()?Auth::user()->orders()->save($order):$order->save();
     Session::forget('cart');
-    return redirect()->route('basket')->with('success', 'The order is accepted for processing! Wait for a call!');
+    return redirect()->route('basket')->with('success', 'The order has been processed! Expect a call!');
   }
 
   public function modal_order($id){
       $product = Product::find($id);
-           $prodimg = null; //define it here as null
-            if(isset($product->cardImage->path)){
-              $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-              $file = $contents
-              ->where('type', '=', 'file')
-              ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
-              ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
-              ->first();
-               $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-            };
       return response()->json([
             'modalProdId' => $product->id,
             'name' => $product->name,
-            'img' => $product->cardImage?($prodimg):('/img/products/no-img.png'),
+            'img' => $product->cardImage?(Storage::disk('public')->exists('products/'.$product->id.'/'.$product->cardImage->path)?Storage::url('products/'.$product->id.'/'.$product->cardImage->path):'/img/products/no-img.png'):'/img/products/no-img.png',
             'price' => $product->price
        ]);
   }
@@ -139,16 +131,6 @@ class BasketController extends Controller
   public function modal_order_place(Request $request){
 
     $product = Product::find($request->id);
-      $prodimg = null; //define it here as null
-       if(isset($product->cardImage->path)){
-         $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-         $file = $contents
-         ->where('type', '=', 'file')
-         ->where('filename', '=', pathinfo($product->cardImage->path, PATHINFO_FILENAME))
-         ->where('extension', '=', pathinfo($product->cardImage->path, PATHINFO_EXTENSION))
-         ->first();
-          $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-       };
     $selprod['items'] = array(
       $request->id => array(
           'name' => $product->name,
@@ -157,7 +139,7 @@ class BasketController extends Controller
           'prod_url' => $product->url,
           'code_cat' => $product->category->code,
           'url_cat' => $product->category->url,
-          'img' => $product->cardImage?($prodimg):('/img/products/no-img.png'),
+          'img' => $product->cardImage?(Storage::disk('public')->exists('products/'.$product->id.'/'.$product->cardImage->path)?Storage::url('products/'.$product->id.'/'.$product->cardImage->path):'/img/products/no-img.png'):'/img/products/no-img.png',
           'cost' => $product->price*$request->qty
         )
       );
@@ -169,14 +151,14 @@ class BasketController extends Controller
 
     $order->cart = serialize($object);
 
-    $order->name = Auth::check()?(Auth::user()->name?Auth::user()->name:$request->username):$request->username;
-    $order->email = Auth::check()?(Auth::user()->email?Auth::user()->email:$request->email):$request->email;
-    $order->phone = Auth::check()?(Auth::user()->phone?Auth::user()->phone:$request->phone):$request->phone;
+    $order->name = $request->username;
+    $order->email = $request->email;
+    $order->phone = $request->phone;
 
     Auth::check()?Auth::user()->orders()->save($order):$order->save();
 
     return response()->json([
-      'notif_text' => 'Your order has been accepted for processing! Wait for a call!'
+      'notif_text' => 'The order has been processed! Expect a call!'
     ]);
   }
 

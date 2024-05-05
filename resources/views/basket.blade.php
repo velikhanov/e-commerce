@@ -27,7 +27,7 @@
             <tbody>
                 @foreach($products as $product)
               <tr>
-                <th scope="row"><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($product['img']))?($product['img']):('/img/products/no-img.png')}}"><span class="basket-prod-name">{{ $product['name'] }}</span></a></th>
+                <th scope="row"><a href="/{{ $product['code_cat'] }}/{{ $product['url_cat'] }}/{{ $product['prod_url'] }}"><img class="basketimg mr-1" src="@isset($product['img']){{Storage::disk('public')->exists('products/'.$product['id'].'/'.$product['img'])?Storage::url('products/'.$product['id'].'/'.$product['img']):'/img/products/no-img.png'}}@else{{'/img/products/no-img.png'}}@endisset"><span class="basket-prod-name">{{ $product['name'] }}</span></a></th>
                 <td>
                   <div class="btn-group form-inline">
                       <div class="prodcount">{{ $product['qty'] }}</div>
@@ -61,7 +61,7 @@
             <h1><strong>Your cart is empty</strong></h1>
         </div>
         <div class="col-lg-12">
-            <a class="btn btn-primary mt-1 mb-1 mr-1" href="{{ route('index') }}">To the main</a><a class="btn btn-primary mt-1 mb-1 ml-1" href="/categories">Catalog</a>
+            <a class="btn btn-primary mt-1 mb-1 mr-1" href="{{ route('index') }}">To main</a><a class="btn btn-primary mt-1 mb-1 ml-1" href="/categories">Product categories</a>
         </div>
         <div class="col-lg-12">
           <img class="img-fluid" src="/img/basket/truck.png">

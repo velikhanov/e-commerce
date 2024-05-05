@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('parent_id', '<>', NULL)->get();
+        $categories = Category::all();
         return view('auth.products.form', compact('categories'));
     }
 
@@ -65,7 +65,7 @@ class ProductController extends Controller
               $dataimg['position'] = $i++;
               $dataimg['updated_at'] = Carbon::now();
               $dataimg['created_at'] = Carbon::now();
-              $prodimg->storeAs('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX', $dataimg['path'], 'google');
+              $prodimg->storeAs('products/'.$product->id.'/', $dataimg['path']);
               ProductImage::create($dataimg);
             };
           };
@@ -99,20 +99,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::where('parent_id', '<>', NULL)->get();
-        foreach ($product->productImage as $prod) {
-         $prodimg = null; //define it here as null
-          if(isset($prod->path)){
-            $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-            $file = $contents
-            ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
-            ->first();
-             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-          };
-          $prod['img_prod_prev_img'] = $prodimg; // create a new field called img_url and assign value
-        };
+        $categories = Category::all();
         return view('auth.products.form', compact('product' ,'categories'));
     }
 
@@ -125,30 +112,38 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-      Session::flash('properties', $request->properties);
+      $data = $request->all();
+
+      $upd_prop = [];
+
+      $pos = 0;
+
+      if(!empty($data['properties'])){
+        foreach($data['properties'] as $d){
+          $upd_prop[$pos] = $d;
+          $pos++;
+        }
+      }
+
+      $data['properties'] = $upd_prop;
+
+      Session::flash('properties', $data['properties']);
       $request->validate([
         'properties' => 'min:1',
         'properties.*.key' => 'min:1',
         'properties.*.value' => 'min:1',
         ]);
-        $data = $request->all();
+        
         $data['url'] = mb_strtolower(preg_replace('/(?!^)\s+/', '_', preg_replace('/[^\00-\255]+/u', '', $request->url)));
         $data['updated_at'] = Carbon::now();
+        // dd($data);
         $product->update($data);
         if(isset($request->imgfordel)){
           foreach($request->imgfordel as $del) {
-
-              if(isset($del)){
-                $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-                $file = $contents
-                ->where('type', '=', 'file')
-                ->where('filename', '=', pathinfo($del, PATHINFO_FILENAME))
-                ->where('extension', '=', pathinfo($del, PATHINFO_EXTENSION))
-                ->first();
-              };
-              isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
-
-            ProductImage::where('path', $del)->delete();
+            if(!empty($del)){
+              Storage::disk('public')->exists('products/'.$product->id.'/'.$del)?Storage::disk('public')->delete('products/'.$product->id.'/'.$del):NULL;
+              ProductImage::where('path', $del)->delete();
+            }
           };
           $editpos = 1;
           foreach ($product->productImage as $imgpos) {
@@ -167,11 +162,11 @@ class ProductController extends Controller
             $dataimg['position'] = $i++;
             $dataimg['updated_at'] = Carbon::now();
             $dataimg['created_at'] = Carbon::now();
-            $prodimg->storeAs('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX', $dataimg['path'], 'google');
+            $prodimg->storeAs('products/'.$product->id.'/', $dataimg['path']);
             ProductImage::create($dataimg);
           };
         };
-        return redirect()->route('products.edit', ['product' => $product->id])->with('success', 'Product data '.$product->name.' has been successfully updated!!');
+        return redirect()->route('products.edit', ['product' => $product->id])->with('success', 'Data of product '.$product->name.' added successfully!');
     }
 
     /**
@@ -184,20 +179,12 @@ class ProductController extends Controller
     {
       if($product->productImage){
         foreach ($product->productImage as $prod) {
-          if(isset($prod->path)){
-            $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-            $file = $contents
-            ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($prod->path, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($prod->path, PATHINFO_EXTENSION))
-            ->first();
-          };
-          isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
+          Storage::disk('public')->exists('products/'.$product->id.'/'.$prod->path)?Storage::disk('public')->delete('products/'.$product->id.'/'.$prod->path):NULL;
           $prod->delete();
         }
       }
         $product->delete();
 
-        return redirect()->route('products.index')->with('danger', 'Product '.$product->name.' successfully deleted!');
+        return redirect()->route('products.index')->with('danger', 'Product '.$product->name.' deleted successfully!');
     }
 }

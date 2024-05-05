@@ -37,14 +37,12 @@
                   {{ Auth::user()->name }} <span class="caret"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right logout" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{{ route('user_panel') }}">Personal area</a>
 								@if(Auth::user()->role)
-							  	<a class="dropdown-item" href="{{ route('admin_order') }}">Orders</a>
-							  	<a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a>
-							  	<a class="dropdown-item" href="{{ route('products.index') }}">Products</a>
+							  	<a class="dropdown-item" href="{{ route('admin_order') }}">Admin panel</a>
 								@endif
+							  	<a class="dropdown-item" href="{{ route('user_panel') }}">Personal area</a>
 							  	<!--<a class="dropdown-item" href="#">Настройки</a>-->
-                  <a id="logout-link" class="dropdown-item" href="#">Log out</a>
+                  <a id="logout-link" class="dropdown-item" href="#">Logout</a>
                   <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
                       @csrf
                   </form>

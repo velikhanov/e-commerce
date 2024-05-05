@@ -10,6 +10,12 @@ use App\Http\Controllers\Admin\CategoryController;
 
 
 //auth
+  // Route::get('/link', function () {        
+  //   $target = 'shop_app/storage/app/public';
+  //   $shortcut = 'storage';
+  //   dd(symlink($target, $shortcut));
+  //   dd('done');
+  // });
 Route::group(['middleware' => 'auth'], function(){
 
   // Route::group(['middleware' => 'role:Admin,CEO'], function(){
@@ -17,7 +23,7 @@ Route::group(['middleware' => 'auth'], function(){
   //
   // });
 
-  Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function(){
+  Route::group(['middleware' => 'role', 'prefix' => 'admin'], function(){
 
       Route::get('/admin-order', [AdminController::class, 'admin_order'])->name('admin_order');
 

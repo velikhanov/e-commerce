@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
+@section('title-admin', 'Авторизация')
 
 @section('content')
 <section class="auth-bg">
@@ -19,7 +19,7 @@
             @endif
 
           <div class="form-group">
-            	<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="E-Mail Address" required autocomplete="email" value="{{old('email')}}" autofocus>
+            	<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="E-Mail Address" required autocomplete="email" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
     		   <div class="bottom-action clearfix">
                 <label class="float-left form-check-label"><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember me</label>
                 @if (Route::has('password.request'))
-                  <!-- <a href="{{ route('password.request') }}" class="float-right">Forgot Password?</a> -->
+                  <a href="{{ route('password.request') }}" class="float-right">Forgot Password?</a>
                 @endif
             </div>
       </form>

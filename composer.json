@@ -14,8 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5",
-        "nao-pon/flysystem-google-drive": "~1.1"
+        "laravel/tinker": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -39,10 +38,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        },
-	"classmap": [
-		"vendor/google/apiclient-services/src/Google/Service/"
-	]
+        }
     },
     "autoload-dev": {
         "psr-4": {

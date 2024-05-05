@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/auth/prodindex.css">
 @endsection
 
-@section('title-admin', 'Категории')
+@section('title-admin', 'Categories')
 
 @section('content-admin')
 <div class="container emp-profile">
@@ -18,13 +18,13 @@
                    #
                </th>
                <th class="text-center">
-                   Название
+                   Name
                </th>
                <th class="text-center">
-                   Родительский элемент
+                   Parent category
                </th>
                <th class="text-center">
-                   Действия
+                   Actions
                </th>
            </tr>
              @foreach($categories as $category)
@@ -36,13 +36,13 @@
                        <div class="btn-group" role="group">
                            <form method="POST">
                                <a class="btn btn-warning" type="button"
-                                  href="{{ route('categories.edit', $category)}}">Редактировать</a>
+                                  href="{{ route('categories.edit', $category)}}">Edit</a>
                                @csrf
                            </form>
                            <form class="ml-1" action="{{ route('categories.destroy', $category)}}" method="POST">
                              @method('DELETE')
                              @csrf
-                             <input class="btn btn-danger" type="submit" value="Удалить">
+                             <input class="btn btn-danger" type="submit" value="Delete">
                            </form>
                        </div>
                    </td>
@@ -50,7 +50,7 @@
                @endforeach
            </tbody>
        </table>
-       <a class="btn btn-success" type="button" href="{{ route('categories.create') }}">Добавить категорию</a>
+       <a class="btn btn-success" type="button" href="{{ route('categories.create') }}">Add category</a>
    </div>
 </div>
 @endsection

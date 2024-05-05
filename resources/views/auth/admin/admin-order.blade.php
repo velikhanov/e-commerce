@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/auth/admin-order.css">
 @endsection
 
-@section('title-admin', 'Orders')
+@section('title-admin', 'All orders')
 
 @section('content-admin')
 <div class="container emp-profile">
@@ -22,13 +22,13 @@
           <tbody>
           @foreach($order->cart->items as $item)
             <tr>
-              <th scope="row"><a href="/{{ $item['code_cat'] }}/{{ $item['url_cat'] }}/{{ $item['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($item['img']))?($item['img']):('/img/products/no-img.png')}}"><span class="basket-prod-name">{{ Str::limit($item['name'], 20) }}</span></a></th>
+              <th scope="row"><a href="/{{ $item['code_cat'] }}/{{ $item['url_cat'] }}/{{ $item['prod_url'] }}"><img class="basketimg mr-1" src="@isset($item['img']){{Storage::disk('public')->exists('products/'.$item['id'].'/'.$item['img'])?Storage::url('products/'.$item['id'].'/'.$item['img']):'/img/products/no-img.png'}}@else{{'/img/products/no-img.png'}}@endisset"><span class="basket-prod-name">{{ Str::limit($item['name'], 20) }}</span></a></th>
               <td class="text-center"><div class="prodcount">{{$item['qty']}}</div></td>
               <td class="text-right">{{$item['cost']}}AZN</td>
             </tr>
           @endforeach
             <tr>
-              <th scope="col"><h5>User</h5></th>
+              <th scope="col"><h5>Customer</h5></th>
               <td class="text-center"><h5>{{ $order->name }}<br>{{ $order->email }}<br>{{ $order->Format_Number_Order }}</h5></td>
               <td class="text-right"><h5>{{ $order->address ?? 'No address'}}</h5></td>
             </tr>

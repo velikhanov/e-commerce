@@ -2,9 +2,6 @@
 
 namespace App\Classes;
 
-use Illuminate\Support\Facades\Storage;
-use App\Models\Product;
-
 class Cart
 {
     public $items = NULL;
@@ -19,19 +16,6 @@ class Cart
       }
     }
     public function add($item, $id){
-      $product = Product::get();
-        foreach($product as $prod){
-         $prodimg = null; //define it here as null
-          if(isset($prod->cardImage->path)){
-            $contents = collect(Storage::disk('google')->listContents('175IwF-UY0bKpii0UXnN7lKpv8nSZ9lmX/', false));
-            $file = $contents
-            ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($prod->cardImage->path, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($prod->cardImage->path, PATHINFO_EXTENSION))
-            ->first();
-             $prodimg = isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL;
-          };
-        };
       $storedItem = [
         'qty' => 0,
         'id' => $item->id,
@@ -41,7 +25,7 @@ class Cart
         'name' => $item->name,
         'cost' => $item->price,
         'price' => $item->price,
-        'img' => $item->cardImage?$prodimg:'/img/products/no-img.png'
+        'img' => $item->cardImage?$item->cardImage->path:NULL
       ];
       if($this->items){
         if(array_key_exists($id, $this->items)){

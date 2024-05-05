@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/main/slick-theme.css">
 @endsection
 
-@section('title', 'Home page')
+@section('title', 'Home')
 
 @section('content')
 <section class="section">
@@ -57,7 +57,7 @@
         @foreach($proditem as $product)
           @foreach($product->products as $item)
             <div class="card">
-              <a class="prodlink" href="/{{ $product->code }}/{{ $product->url }}/{{ $item->url }}"><img class="card-img-top" src="{{(!is_null($item->cardImage) && !is_null($item->img_prod_url)) ? $item->img_prod_url : '/img/products/no-img.png'}}" alt="Card image cap"></a>
+              <a class="prodlink" href="/{{ $product->code }}/{{ $product->url }}/{{ $item->url }}"><img class="card-img-top" src="@isset($item->cardImage){{Storage::disk('public')->exists('products/'.$item->id.'/'.$item->cardImage->path)?Storage::url('products/'.$item->id.'/'.$item->cardImage->path):'/img/products/no-img.png'}}@else{{'/img/products/no-img.png'}}@endisset" alt="Card image cap"></a>
               <div class="card-body">
                 <a href="/{{ $product->code }}/{{ $product->url }}/{{ $item->url }}"><h5 class="card-title text-center">{{ $item->name }}</h5></a>
                 <div class="prch"><span class="card-text">{{ $item->price }}</span><span class="card-text"><i class="{{ $item->is_available_icon }}"></i>{{ $item->is_available_text }}</span></div><br>
@@ -71,10 +71,10 @@
                 </div>
               </div><!--end card-body-->
               <div class="card-footer"></div>
-              <div class="text-center"><i class="fa fa-handshake"></i><span class="reg">Placed an order for 10 people</span><br>
+              <div class="text-center"><i class="fa fa-handshake"></i><span class="reg">Ordered by 10 customers</span><br>
               <div class="product-icon-container">
                 <a href="{{ route('basket-add', [ 'id' => $item->id ]) }}" class="ajaxcartadd scrollOffset btn btn-success mt-2 mb-1">Add to cart</a>
-                <a href="{{ route('modal_order', [ 'id' => $item->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1" data-id="">Buy now</a>
+                <a href="{{ route('modal_order', [ 'id' => $item->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1" data-id="">Buy</a>
                 <!-- <a href="{{ route('modal_order', [ 'id' => $item->id ]) }}" class="modal_order btn btn-danger mt-2 mb-1" data-id="{{ $item->id }}" type="button" data-toggle="modal" data-target="#staticBackdrop">Купить</a> -->
               </div>
               </div>

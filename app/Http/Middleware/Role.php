@@ -22,7 +22,7 @@ class Role
          $user = Auth::user();
 
         if (!$user->isAdmin()) {
-            return redirect()->back()->with('warning', 'У вас нет прав администратора');
+            return redirect()->back()->with('warning', 'You do not have administrator rights!');
         }
 
         return $next($request);

@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('parent_id', NULL)->get();
+        $categories = Category::all();
         return view('auth.categories.form', compact('categories'));
     }
 
@@ -41,11 +41,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+      // dd($request);
       $data = $request->all();
-      $request->parent_id == NULL ? $data['code'] = 'categories' : $data['code'] = $request->code;
+
+      if($request->parent_id != NULL){
+        $parent_category_code = Category::select('name')->where('id', $request->parent_id)->first();
+      }
+
+      $request->parent_id == NULL ? $data['code'] = 'categories' : $data['code'] = strtolower($parent_category_code->name);
+      $data['url'] = strtolower($request->name);
+
       if ($request->hasFile('catimg')){
         $data['img'] = 'img_'.rand(1, 999).time().'.'.$request->file('catimg')->getClientOriginalExtension();
-        $request->file('catimg')->storeAs('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze', $data['img'], 'google');
+        $request->file('catimg')->storeAs('categories', $data['img']);
       };
 
       $data['updated_at'] = Carbon::now();
@@ -73,17 +81,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::where('parent_id', NULL)->get();
-        if(isset($category->img)){
-          $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
-          $file = $contents
-          ->where('type', '=', 'file')
-          ->where('filename', '=', pathinfo($category->img, PATHINFO_FILENAME))
-          ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
-          ->first();
-        };
-        $prevcatimg = isset($category->img)?(isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->url($file['path']):NULL):NULL):NULL;
-        return view('auth.categories.form', compact('categories', 'category', 'prevcatimg'));
+        $categories = Category::where('id', '!=', $category->id)->get();
+        return view('auth.categories.form', compact('categories', 'category'));
     }
 
     /**
@@ -95,27 +94,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $data = $request->all();
+      $data = $request->all();
 
-        $request->parent_id == NULL ? $data['code'] = 'categories' : $data['code'] = $request->code;
-        if ($request->hasFile('catimg')){
-          if(isset($category->img)){
-            $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
-            $file = $contents
-            ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($category->img, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
-            ->first();
-          isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
-          };
-          $data['img'] = 'img_'.rand(1, 999).time().'.'.$request->file('catimg')->getClientOriginalExtension();
-          $request->file('catimg')->storeAs('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze', $data['img'], 'google');
-        }
-        $data['updated_at'] = Carbon::now();
+      if($request->parent_id != NULL){
+        $parent_category_code = Category::select('name')->where('id', $request->parent_id)->first();
+      }
 
-        $category->update($data);
+      $data['code'] = empty($request->parent_id) || $request->parent_id == '-' ? 'categories' : strtolower($parent_category_code->name);
 
-        return redirect()->route('categories.edit', $category)->with('success', 'Category '.$category->name.' successfully updated!');
+      $data['url'] = strtolower($request->name);
+      
+      if(isset($request->imgfordel)){
+        Storage::disk('public')->exists('categories/'.$category->id.'/'.$data['imgfordel'])?Storage::disk('public')->delete('categories/'.$category->id.'/'.$data['imgfordel']):NULL;
+        $data['img'] = NULL;
+      };
+
+      if ($request->hasFile('catimg')){
+        Storage::disk('public')->exists('categories/'.$category->img)?Storage::disk('public')->delete('categories/'.$category->img):NULL;
+        $data['img'] = 'img_'.rand(1, 999).time().'.'.$request->file('catimg')->getClientOriginalExtension();
+        $request->file('catimg')->storeAs('categories', $data['img']);
+      }
+      $data['updated_at'] = Carbon::now();
+
+      $category->update($data);
+
+      return redirect()->route('categories.edit', $category)->with('success', 'Category '.$category->name.' added successfully!');
     }
 
     /**
@@ -126,16 +129,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-      if(isset($category->img)){
-        $contents = collect(Storage::disk('google')->listContents('1lngtMrfEvcwjnJWp6b7Bxv2q5NDdYJze/', false));
-        $file = $contents
-        ->where('type', '=', 'file')
-        ->where('filename', '=', pathinfo($category->img, PATHINFO_FILENAME))
-        ->where('extension', '=', pathinfo($category->img, PATHINFO_EXTENSION))
-        ->first();
-      isset($file['path'])?(Storage::disk('google')->exists($file['path'])?Storage::disk('google')->delete($file['path']):NULL):NULL;
-      };
+      Storage::disk('public')->exists('categories/'.$category->img)?Storage::disk('public')->delete('categories/'.$category->img):NULL;
       $category->delete();
-      return redirect()->route('categories.index')->with('danger', 'Category '.$category->name.' successfully deleted!');
+      return redirect()->route('categories.index')->with('danger', 'Category '.$category->name.' deleted successfully!');
     }
 }

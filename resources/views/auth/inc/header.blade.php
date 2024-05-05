@@ -1,11 +1,10 @@
 @section('header-admin')
 <div class="d-flex">
     <div class="vertical-nav bg-white" id="sidebar">
-      <div class="py-4 px-3 mb-1">
+      <div class="py-4 px-3 mb-4">
         <div class="media d-flex align-items-center">
           <div class="profile-img">
-            <!-- <a href="{{ ((Auth::user()->img) && ($userimg)) ? ($userimg) : '/img/svg/laptop-house-solid.svg' }}" class="rounded-circle img-thumbnail shadow-sm"></a> -->
-            <a href="{{ ((Auth::user()->img) && ($userimg)) ? ($userimg) : '/img/svg/laptop-house-solid.svg' }}" data-fancybox="gallery-1"><img src="{{ ((Auth::user()->img) && ($userimg)) ? ($userimg) : '/img/svg/laptop-house-solid.svg' }}" class="rounded-circle img-thumbnail shadow-sm"></a>
+            <a href="{{ ((Auth::user()->img) && (Storage::disk('public')->exists('users/'.Auth::user()->id.'/'.Auth::user()->img))) ? (Storage::url('users/'.Auth::user()->id.'/'.Auth::user()->img)) : '/img/svg/laptop-house-solid.svg' }}" data-fancybox="gallery-1"><img src="{{ ((Auth::user()->img) && (Storage::disk('public')->exists('users/'.Auth::user()->id.'/'.Auth::user()->img))) ? (Storage::url('users/'.Auth::user()->id.'/'.Auth::user()->img)) : '/img/svg/laptop-house-solid.svg' }}" class="rounded-circle img-thumbnail shadow-sm"></a>
             <form action="{{ route('user_edit') }}" class="user_edit_form" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="file btn btn-lg btn-primary">
@@ -70,27 +69,18 @@
                 </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('categories.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/categories') ? 'activeNavItem' : NULL }}">
+          <a href="{{ route('categories.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/categories') || Request::is('admin/categories/*/edit') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-pie-chart mr-1 text-primary fa-fw"></i>
                     Categories
                 </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('products.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/products') ? 'activeNavItem' : NULL }}">
+          <a href="{{ route('products.index') }}" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('admin/products') || Request::is('admin/products/*/edit') ? 'activeNavItem' : NULL }}">
                     <i class="fa fa-line-chart mr-1 text-primary fa-fw"></i>
                     Products
                 </a>
         </li>
         @endif
-        <li class="nav-item">
-          <a id="logout-link" href="#" class="hoverNavItem nav-fonts nav-link text-dark font-italic">
-              <i class="fa fa-area-chart mr-1 text-primary fa-fw"></i>
-              Log out
-          </a>
-          <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
-              @csrf
-          </form>
-        </li>
         <!-- @if(Auth::user()->role === 2)
         <li class="nav-item mb-3">
           <a href="#" class="hoverNavItem nav-fonts nav-link text-dark font-italic {{ Request::is('edit-users') ? 'activeNavItem' : NULL }}">

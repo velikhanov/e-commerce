@@ -10,7 +10,7 @@
 <div class="container emp-profile">
   <div class="col-md-12">
     @include('inc.flash')
-       <h1>Products</h1>
+       <h1>Товары</h1>
        <table class="table table-bordered">
            <tbody>
            <tr>

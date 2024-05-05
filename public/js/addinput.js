@@ -5,28 +5,24 @@ if($('#icount').length){
   i = 0;
 };
 $("#addRow").click(function () {
-        var html = '';
-        html += '<div id="inputFormRow">';
-        html += '<div class="input-group mb-3">';
-        html += '<input type="text" name="properties['+i+'][key]" class="key form-control m-input ml-3" placeholder="Key" autocomplete="off">';
-        html += '<input type="text" name="properties['+i+'][value]" class="value form-control m-input ml-3" placeholder="Value" autocomplete="off">';
+    var html = '';
+    html += '<div id="inputFormRow">';
+      html += '<div class="input-group mb-3">';
+        html += '<input type="text" name="properties['+i+'][key]" class="form-control m-input ml-3" placeholder="Property" autocomplete="off">';
+        html += '<input type="text" name="properties['+i+'][value]" class="form-control m-input ml-3" placeholder="Value" autocomplete="off">';
         html += '<div class="input-group-append ml-3">';
-        html += '<button id="removeRow" type="button" class="btn btn-danger">Delete</button>';
+          html += '<button id="removeRow" type="button" class="btn btn-danger">Delete</button>';
         html += '</div>';
-        html += '</div>';
+      html += '</div>';
+    html += '</div>';
 
-        i++;
+    i++;
 
-        $('#newRow').append(html);
-    });
+    $('#newRow').append(html);
+});
+
 // remove row
 $(document).on('click', '#removeRow', function () {
-    i--;
     $(this).closest('#inputFormRow').remove();
-    for (i = 0; i < $('.key').length; i++){
-      $('.key').attr('name', 'properties['+i+'][key]');
-      $('.value').attr('name', 'properties['+i+'][value]');
-
-    };
 });
-    //
+//

@@ -12,9 +12,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-sm-6 text-center footer-menus">
-                <h4>Useful links</h4>
-                <ul>
+            <div class="col-lg-2 col-sm-6 footer-menus">
+                <h4 class="text-center">Useful links</h4>
+                <ul class="text-left">
                     <li><i class="fas fa-check"></i> <a href="#">Main</a></li>
                     <li><i class="fas fa-check"></i> <a href="#">About us</a></li>
                     <li><i class="fas fa-check"></i> <a href="#">Services</a></li>
@@ -23,9 +23,9 @@
                 </ul>
             </div>
 
-            <div class="col-lg-2 col-sm-6 text-center footer-menus">
-                <h4>Our services</h4>
-                <ul>
+            <div class="col-lg-2 col-sm-6 footer-menus">
+                <h4 class="text-center">Our services</h4>
+                <ul class="text-left">
                     <li><i class="fas fa-check"></i> <a href="#">Something</a></li>
                     <li><i class="fas fa-check"></i> <a href="#">Something else</a></li>
                     <li><i class="fas fa-check"></i> <a href="#">Something else</a></li>
@@ -34,7 +34,7 @@
                 </ul>
             </div>
 
-            <div class="col-lg-4 col-sm-6 text-center newsletter">
+            <div class="col-lg-5 col-sm-6 text-center newsletter">
                 <h4>Subscribe to our newsletter</h4>
                 <p>Enter your E-mail</p>
                 <form action="" method="post"><input type="email" name="email" placeholder="Will be implemented later" readonly/><input type="submit" value="Subscribe" /></form>

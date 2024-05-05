@@ -41,19 +41,19 @@
                                             <tr>
                                               <th scope="col">Name</th>
                                               <td class="userdata">{{ Auth::user()->name }}</td>
-                                              <td class="useredit"><input name="name" placeholder="Enter your new name"><td>
+                                              <td class="useredit"><input name="name" placeholder="Enter new name"><td>
                                               <td><a href="#"><i class="fas fa-edit"></i><i class="fas fa-times"></i></a><td>
                                             </tr>
                                             <tr>
                                               <th scope="col">E-Mail</th>
                                               <td class="userdata">{{ Auth::user()->email }}</td>
-                                              <td class="useredit"><input onClick="setPos();" name="email" placeholder="Enter your new Email"><td>
+                                              <td class="useredit"><input onClick="setPos();" name="email" placeholder="Enter new Email"><td>
                                               <td><a href="#"><i class="fas fa-edit"></i><i class="fas fa-times"></i></a><td>
                                             </tr>
                                             <tr>
-                                              <th scope="col">Phone</th>
+                                              <th scope="col">Tel.</th>
                                               <td class="userdata">{{ Auth::user()->Format_Number_User }}</td>
-                                              <td class="useredit"><input name="phone" placeholder="Enter your new Phone"><td>
+                                              <td class="useredit"><input name="phone" placeholder="Enter new number"><td>
                                               <td><a href="#"><i class="fas fa-edit"></i><i class="fas fa-times"></i></a><td>
                                             </tr>
                                             <tr>
@@ -84,7 +84,7 @@
                                       <tbody>
                                           @foreach($order->cart->items as $item)
                                         <tr>
-                                          <th scope="row"><a href="/{{ $item['code_cat'] }}/{{ $item['url_cat'] }}/{{ $item['prod_url'] }}"><img class="basketimg mr-1" src="{{(!is_null($item['img']))?($item['img']):('/img/products/no-img.png')}}"><span class="basket-prod-name">{{ Str::limit($item['name'], 20) }}</span></a></th>
+                                          <th scope="row"><a href="/{{ $item['code_cat'] }}/{{ $item['url_cat'] }}/{{ $item['prod_url'] }}"><img class="basketimg mr-1" src="@isset($item['img']){{Storage::disk('public')->exists('products/'.$item['id'].'/'.$item['img'])?Storage::url('products/'.$item['id'].'/'.$item['img']):'/img/products/no-img.png'}}@else{{'/img/products/no-img.png'}}@endisset"><span class="basket-prod-name">{{ Str::limit($item['name'], 20) }}</span></a></th>
                                           <td class="text-center"><div class="prodcount">{{$item['qty']}}</div></td>
                                           <td class="text-right">{{$item['cost']}}AZN</td>
                                         </tr>
